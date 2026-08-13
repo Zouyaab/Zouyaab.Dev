@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zouyaab Hussain — Data Scientist</title>
+<meta name="description" content="Zouyaab Hussain — Data Scientist working on applied machine learning: local vision-model OCR, gradient-boosted market models and privacy-first AI systems." />
+
+<!-- Open Graph (for LinkedIn link previews) -->
+<meta property="og:title" content="Zouyaab Hussain — Data Scientist" />
+<meta property="og:description" content="Applied machine learning: local vision-model OCR, XGBoost/LightGBM models and privacy-first AI systems." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://zouyaab.github.io/Zouyaab.Dev/" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Animated background -->
+<div class="bg-orbs" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark">ZH</span>
+      <span class="logo-text">Zouyaab<span class="accent">.Dev</span></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#process">Process</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="badge reveal">
+        <span class="pulse"></span> Open to Data Science &amp; AI roles
+      </span>
+
+      <h1 class="reveal">
+        Hi, I'm Zouyaab —<br />
+        <span class="gradient-text">a Data Scientist</span>
+      </h1>
+
+      <div class="tag-row reveal">
+        <span>Machine Learning</span>
+        <span>Computer Vision</span>
+        <span>XGBoost / LightGBM</span>
+        <span>Python</span>
+        <span>Automation</span>
+      </div>
+
+      <p class="hero-desc reveal">
+        I turn messy, real-world data into systems people actually use — from
+        <strong>gradient-boosted prediction models</strong> to <strong>local vision models</strong>
+        that read handwritten medical forms on-device and push clean records into Salesforce.
+        Privacy-first by design.
+      </p>
+
+      <div class="hero-actions reveal">
+        <a href="#projects" class="btn btn-primary">View My Work <span>&rarr;</span></a>
+        <a href="#contact" class="btn btn-ghost">Say Hello</a>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat">
+          <b data-count="6">0</b>
+          <small>Projects Built</small>
+        </div>
+        <div class="stat">
+          <b data-count="100" data-suffix="%">0</b>
+          <small>Local / Private OCR</small>
+        </div>
+        <div class="stat">
+          <b data-count="11160" data-suffix="+">0</b>
+          <small>Forms / Month Modelled</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="code-card">
+        <div class="code-head">
+          <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
+          <em>ipr_pipeline.py</em>
+        </div>
+<pre class="code-body"><code><span class="c-key">from</span> ollama_ocr <span class="c-key">import</span> extract_ipr_fields
+
+fields, usage = extract_ipr_fields(form)
+
+<span class="c-cmt"># flag anything the human must check</span>
+<span class="c-key">for</span> f <span class="c-key">in</span> fields:
+    <span class="c-key">if</span> f.confidence &lt;= threshold:
+        f.<span class="c-fn">flag_for_review</span>()
+
+<span class="c-key">if</span> all_verified(fields):
+    <span class="c-fn">send_to_salesforce</span>(fields)</code></pre>
+        <div class="code-foot">
+          <span class="chip">PHI never leaves the machine</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-hint" aria-label="Scroll down">
+    <span class="mouse"></span>
+  </a>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="container">
+    <span class="eyebrow reveal">About Me</span>
+    <h2 class="section-title reveal">Who I Am</h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm a data scientist focused on applied machine learning — making models useful inside
+          real workflows, not just inside a notebook.
+        </p>
+        <p>
+          My current work is the <strong>Affinity Core IPR digitization platform</strong>: a
+          Streamlit application that turns messy handwritten medical forms into structured,
+          validated data. It runs a <strong>Qwen3-VL vision model locally through Ollama</strong>,
+          scores every extracted field for confidence, forces a human to verify anything below an
+          admin-configurable threshold, then writes a clean record straight into Salesforce over
+          the REST API.
+        </p>
+        <p>
+          Alongside that I build predictive models — including a
+          <strong>3-day market direction classifier using an XGBoost + LightGBM ensemble</strong> —
+          and I care a lot about the unglamorous parts: token accounting, audit logging,
+          role-based access and cost modelling. Those are what decide whether an AI feature ships.
+        </p>
+
+        <div class="about-info">
+          <div><span>Location</span><b>Pakistan</b></div>
+          <div><span>Focus</span><b>Data Science &amp; AI</b></div>
+          <div><span>Languages</span><b>English, Urdu</b></div>
+          <div><span>GitHub</span><b><a href="https://github.com/Zouyaab" target="_blank" rel="noopener">@Zouyaab</a></b></div>
+        </div>
+      </div>
+
+      <div class="about-cards">
+        <article class="glass-card reveal">
+          <div class="ic">🔒</div>
+          <h4>Privacy-first AI</h4>
+          <p>On-device inference so protected health information never leaves the machine.</p>
+        </article>
+        <article class="glass-card reveal">
+          <div class="ic">👁️</div>
+          <h4>Vision &amp; OCR</h4>
+          <p>Reading real handwriting — not clean scans — with confidence scoring per field.</p>
+        </article>
+        <article class="glass-card reveal">
+          <div class="ic">📈</div>
+          <h4>Predictive Modelling</h4>
+          <p>Gradient-boosted ensembles, feature engineering and honest evaluation.</p>
+        </article>
+        <article class="glass-card reveal">
+          <div class="ic">📊</div>
+          <h4>Cost &amp; Observability</h4>
+          <p>Token usage, audit logs and dashboards so the business can see what AI costs.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section alt" id="process">
+  <div class="container">
+    <span class="eyebrow reveal">How I Work</span>
+    <h2 class="section-title reveal">My Development Process</h2>
+    <p class="section-sub reveal">
+      Every build starts with the real constraint — privacy, accuracy or cost — and ends with
+      something a team can actually run.
+    </p>
+
+    <div class="steps">
+      <article class="step reveal">
+        <span class="step-num">01</span>
+        <h4>Understand</h4>
+        <p>Map the workflow and the hard constraints: compliance, accuracy targets, where data may live.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step-num">02</span>
+        <h4>Prototype</h4>
+        <p>Get a working model on real, messy inputs fast — measure accuracy before polishing anything.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step-num">03</span>
+        <h4>Add the Human Gate</h4>
+        <p>Confidence scoring, review flags and explicit approval so nothing wrong reaches production.</p>
+      </article>
+      <article class="step reveal">
+        <span class="step-num">04</span>
+        <h4>Ship &amp; Measure</h4>
+        <p>Integrate, log every action, track token cost, then tune thresholds from real usage.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="section" id="skills">
+  <div class="container">
+    <span class="eyebrow reveal">Technical Skills</span>
+    <h2 class="section-title reveal">My Expertise</h2>
+
+    <div class="skills-grid">
+      <div class="skill-col reveal">
+        <h4>Data Science &amp; ML</h4>
+        <div class="bar" data-level="90"><label>Python <i>90%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="85"><label>XGBoost / LightGBM <i>85%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="85"><label>Vision models / OCR <i>85%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="82"><label>Feature engineering <i>82%</i></label><div class="track"><span></span></div></div>
+      </div>
+
+      <div class="skill-col reveal">
+        <h4>Engineering</h4>
+        <div class="bar" data-level="88"><label>Streamlit <i>88%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="85"><label>Ollama / local LLMs <i>85%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="82"><label>REST APIs / OAuth <i>82%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="78"><label>SQL / SQLite <i>78%</i></label><div class="track"><span></span></div></div>
+      </div>
+
+      <div class="skill-col wide reveal">
+        <h4>Core Expertise</h4>
+        <div class="pills">
+          <span>Machine Learning</span><span>Computer Vision</span><span>Document AI / OCR</span>
+          <span>Gradient boosting &amp; ensembles</span><span>Local-first LLM deployment</span>
+          <span>Human-in-the-loop review</span><span>Salesforce integration</span>
+          <span>Workflow automation</span><span>HIPAA-aware architecture</span>
+          <span>Token &amp; cost modelling</span>
+        </div>
+
+        <h4 class="mt">Tools &amp; Technologies</h4>
+        <div class="pills muted">
+          <span>Python</span><span>Pandas</span><span>NumPy</span><span>scikit-learn</span>
+          <span>XGBoost</span><span>LightGBM</span><span>Streamlit</span><span>Ollama</span>
+          <span>Qwen3-VL</span><span>OpenCV</span><span>SQLite</span><span>Salesforce REST</span>
+          <span>AWS Bedrock</span><span>Git &amp; GitHub</span><span>Google Colab</span><span>Jupyter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section alt" id="projects">
+  <div class="container">
+    <span class="eyebrow reveal">Selected Work</span>
+    <h2 class="section-title reveal">My Projects</h2>
+    <p class="section-sub reveal">
+      Production tools and self-driven builds in machine learning, vision and automation.
+    </p>
+
+    <div class="projects">
+      <!-- 01 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">01</span>
+          <span class="p-ic">🏥</span>
+        </div>
+        <h3>Affinity Core — IPR Digitization</h3>
+        <p>
+          Streamlit platform that reads handwritten Implantable Prosthesis Report forms with a
+          local Qwen3-VL vision model, scores every field, forces human verification below an
+          admin-set threshold, then creates the record in Salesforce. Tracks input/output tokens
+          per form and logs all activity for an admin dashboard.
+        </p>
+        <div class="p-tags">
+          <span>Python</span><span>Streamlit</span><span>Ollama</span><span>Qwen3-VL</span>
+          <span>Salesforce REST</span><span>SQLite</span>
+        </div>
+        <span class="p-private">🔒 Private — client project</span>
+      </article>
+
+      <!-- 02 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">02</span>
+          <span class="p-ic">📈</span>
+        </div>
+        <h3>3-Day Market Direction Model</h3>
+        <p>
+          Colab notebook that predicts 3-day UP/DOWN market direction using an
+          <strong>XGBoost + LightGBM ensemble</strong> — feature engineering across multiple
+          indicators, model training and evaluation of directional accuracy.
+        </p>
+        <div class="p-tags">
+          <span>Python</span><span>XGBoost</span><span>LightGBM</span><span>Jupyter</span><span>Colab</span>
+        </div>
+        <a class="p-link" href="https://github.com/Zouyaab/3d-market-direction-model" target="_blank" rel="noopener">
+          View on GitHub <span>↗</span>
+        </a>
+      </article>
+
+      <!-- 03 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">03</span>
+          <span class="p-ic">🛡️</span>
+        </div>
+        <h3>Human-in-the-Loop Review Gate</h3>
+        <p>
+          Confidence-based validation layer: any field at or below a configurable threshold is
+          framed red and locked until a reviewer corrects and ticks it. The send action stays
+          disabled until every flagged field is verified — turning green only when safe.
+        </p>
+        <div class="p-tags">
+          <span>Streamlit</span><span>Session state</span><span>Custom CSS</span><span>UX safety</span>
+        </div>
+        <span class="p-private">🔒 Private — client project</span>
+      </article>
+
+      <!-- 04 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">04</span>
+          <span class="p-ic">📊</span>
+        </div>
+        <h3>Admin Dashboard &amp; Activity Audit</h3>
+        <p>
+          Role-based admin view over a local SQLite log: who signed in, who approved each
+          Salesforce send, token usage per run, and a control to raise or lower the review
+          confidence threshold — every change logged with old and new values.
+        </p>
+        <div class="p-tags">
+          <span>SQLite</span><span>Role-based access</span><span>Audit logging</span><span>Metrics</span>
+        </div>
+        <span class="p-private">🔒 Private — client project</span>
+      </article>
+
+      <!-- 05 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">05</span>
+          <span class="p-ic">💰</span>
+        </div>
+        <h3>AI Cost &amp; Token Analysis</h3>
+        <p>
+          Measured real token consumption per document, then modelled the monthly cost of running
+          a larger hosted vision model (Qwen3-VL 235B on AWS Bedrock) against local inference —
+          delivered as an executive brief covering HIPAA and pay-per-use implications.
+        </p>
+        <div class="p-tags">
+          <span>AWS Bedrock</span><span>Cost modelling</span><span>Token metrics</span><span>Reporting</span>
+        </div>
+        <span class="p-private">🔒 Internal analysis</span>
+      </article>
+
+      <!-- 06 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">06</span>
+          <span class="p-ic">🧩</span>
+        </div>
+        <h3>Workflow Mapping &amp; Documentation</h3>
+        <p>
+          End-to-end process diagrams of the digitization pipeline — actors, automation, decision
+          gates and signals — rendered from Mermaid source so the architecture stays
+          version-controlled alongside the code.
+        </p>
+        <div class="p-tags">
+          <span>Mermaid</span><span>System design</span><span>Documentation</span>
+        </div>
+        <span class="p-private">🔒 Internal documentation</span>
+      </article>
+    </div>
+
+    <div class="cta-band reveal">
+      <div>
+        <h3>Got a project in mind?</h3>
+        <p>I'm open to data science roles, freelance builds and collaborations.</p>
+      </div>
+      <a href="#contact" class="btn btn-primary">Let's Work Together <span>&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section" id="experience">
+  <div class="container">
+    <span class="eyebrow reveal">Work History</span>
+    <h2 class="section-title reveal">Experience</h2>
+
+    <div class="timeline">
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-meta">
+            <span class="tl-date">2026 — Present</span>
+            <span class="tag-live">Current</span>
+          </div>
+          <h4>Data Scientist</h4>
+          <span class="tl-org">Affinity Core</span>
+          <p>
+            Building the IPR digitization platform end to end: local vision-model OCR,
+            confidence-based human review, Salesforce record creation, token tracking,
+            activity auditing and an admin dashboard.
+          </p>
+          <ul>
+            <li>Deployed a local Qwen3-VL pipeline so patient data never leaves the machine</li>
+            <li>Designed the review gate that blocks sending until every low-confidence field is verified</li>
+            <li>Integrated Salesforce via OAuth client-credentials with typed field mapping</li>
+            <li>Added token accounting and an executive cost model for hosted alternatives</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- TODO: add your earlier role(s) — send me details and I'll fill them in -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="section alt" id="education">
+  <div class="container">
+    <span class="eyebrow reveal">Academic Background</span>
+    <h2 class="section-title reveal">Education</h2>
+
+    <div class="edu-grid">
+      <!-- TODO: replace with your real education -->
+      <article class="edu reveal">
+        <span class="edu-num">01</span>
+        <h4>Your Degree</h4>
+        <span class="edu-org">Your University</span>
+        <p>Start — End year</p>
+      </article>
+      <article class="edu reveal">
+        <span class="edu-num">02</span>
+        <h4>Intermediate / College</h4>
+        <span class="edu-org">Your College &amp; Board</span>
+        <p>Start — End year</p>
+      </article>
+      <article class="edu reveal">
+        <span class="edu-num">03</span>
+        <h4>Certifications</h4>
+        <span class="edu-org">Add your certificates</span>
+        <p>Data Science · Python · AI</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="container">
+    <span class="eyebrow reveal">Get In Touch</span>
+    <h2 class="section-title reveal">Let's Work Together</h2>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p>
+          I'm open to data science and AI roles, freelance projects and collaborations.
+          The fastest way to reach me is LinkedIn.
+        </p>
+
+        <ul class="contact-list">
+          <li>
+            <span class="ci">💼</span>
+            <div><small>LinkedIn</small>
+              <a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener">
+                zouyaab-hussain
+              </a>
+            </div>
+          </li>
+          <li>
+            <span class="ci">🐙</span>
+            <div><small>GitHub</small>
+              <a href="https://github.com/Zouyaab" target="_blank" rel="noopener">github.com/Zouyaab</a>
+            </div>
+          </li>
+          <li>
+            <span class="ci">📍</span>
+            <div><small>Location</small><b>Pakistan</b></div>
+          </li>
+        </ul>
+
+        <a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener"
+           class="btn btn-primary" style="margin-top:26px">
+          Connect on LinkedIn <span>&rarr;</span>
+        </a>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="row">
+          <label>
+            <span>Your Name</span>
+            <input type="text" name="name" required placeholder="Jane Doe" />
+          </label>
+          <label>
+            <span>Email Address</span>
+            <input type="email" name="email" required placeholder="jane@company.com" />
+          </label>
+        </div>
+        <label>
+          <span>Subject</span>
+          <input type="text" name="subject" required placeholder="Project enquiry" />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary full">Send Message <span>&rarr;</span></button>
+        <p class="form-note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Zouyaab Hussain</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Zouyaab" target="_blank" rel="noopener">GitHub</a>
+      <a href="#home">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
