@@ -12,14 +12,18 @@ A single-page developer portfolio built with plain HTML, CSS and JavaScript — 
 | `styles.css` | Styling, theme variables, responsive rules |
 | `script.js` | Nav, scroll reveal, counters, skill bars, contact form |
 
-## Before you publish — fill these in
+## Still to fill in
 
-Search `index.html` for `TODO` and replace:
+Search `index.html` for `TODO`:
 
-1. **Email** — in the contact section and in `script.js` (`MY_EMAIL`)
-2. **LinkedIn URL** — contact section
-3. **Experience** — the second timeline entry (your earlier role)
-4. **Education** — all three cards
+1. **Education** — all three cards are still placeholders
+2. **Experience** — add your earlier role(s) above the Affinity Core entry
+
+Optional: set `MY_EMAIL` in `script.js` to enable the mailto flow on the contact
+form. While it's blank, the form sends people to LinkedIn instead.
+
+Already correct: name, role (Data Scientist), LinkedIn, GitHub, projects.
+Private client work is marked with a lock badge instead of a dead GitHub link.
 
 ## Change the colour theme
 
@@ -53,15 +57,14 @@ Then visit http://localhost:8000
 
 ## Deploy to GitHub Pages
 
-1. Create a **public** repo named `Zouyaab.Dev` on GitHub.
-2. Push this folder:
+The local repo is already initialised, committed on `main`, with `origin` set to
+`https://github.com/Zouyaab/Zouyaab.Dev.git`.
+
+1. Create a **public** repo named `Zouyaab.Dev` on GitHub — do **not** add a
+   README, `.gitignore` or licence (keep it empty).
+2. Push:
 
 ```bash
-git init
-git add .
-git commit -m "Add portfolio site"
-git branch -M main
-git remote add origin https://github.com/Zouyaab/Zouyaab.Dev.git
 git push -u origin main
 ```
 
@@ -78,4 +81,4 @@ Give it 1–2 minutes on the first deploy.
 
 - **Profile → Contact info → Website** — add the URL
 - **Featured section** — add it as a link so it shows a preview card
-- **Headline** — mention it, e.g. "AI / ML Engineer · portfolio: Zouyaab.github.io/Zouyaab.Dev"
+- **Headline** — mention it, e.g. "Data Scientist · portfolio: Zouyaab.github.io/Zouyaab.Dev"
