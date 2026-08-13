@@ -17,7 +17,7 @@ A single-page developer portfolio built with plain HTML, CSS and JavaScript — 
 Search `index.html` for `TODO`:
 
 1. **Education** — all three cards are still placeholders
-2. **Experience** — add your earlier role(s) above the Affinity Core entry
+2. **Experience** — add your earlier role(s) above the current internship entry
 
 Optional: set `MY_EMAIL` in `script.js` to enable the mailto flow on the contact
 form. While it's blank, the form sends people to LinkedIn instead.
