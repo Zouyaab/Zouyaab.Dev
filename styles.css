@@ -1,24 +1,24 @@
 /* =========================================================
    Zouyaab.Dev — portfolio styles
-   THEME: "Nebula" — violet + magenta on near-black
+   THEME: "Titanium" — steel blue + electric cyan on gunmetal
    To change the whole site colour, swap the 4 vars in
    :root marked THEME. Alternate palettes at the bottom.
    ========================================================= */
 
 :root{
   /* ---- THEME (change these 4) ---- */
-  --brand:      #7C5CFF;   /* primary   */
-  --brand-2:    #FF4D9D;   /* accent    */
-  --bg:         #07070D;   /* page base */
-  --surface:    #10101B;   /* cards     */
+  --brand:      #2F6BFF;   /* primary   */
+  --brand-2:    #22D3EE;   /* accent    */
+  --bg:         #05070C;   /* page base */
+  --surface:    #0C1220;   /* cards     */
 
   /* derived */
   --brand-soft: color-mix(in srgb, var(--brand) 16%, transparent);
-  --line:       rgba(255,255,255,.09);
-  --line-2:     rgba(255,255,255,.16);
-  --text:       #EDEDF5;
-  --muted:      #A0A0B4;
-  --muted-2:    #6F6F86;
+  --line:       rgba(255,255,255,.08);
+  --line-2:     rgba(255,255,255,.15);
+  --text:       #E8EDF5;
+  --muted:      #9AA6B8;
+  --muted-2:    #66748A;
   --grad:       linear-gradient(115deg, var(--brand), var(--brand-2));
 
   --radius:     16px;
@@ -484,15 +484,15 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
 /* =========================================================
    ALTERNATE PALETTES — copy one block into :root to swap
    ---------------------------------------------------------
-   EMERALD / LIME
-     --brand:#10B981; --brand-2:#A3E635; --bg:#06100C; --surface:#0D1A14;
+   GUNMETAL / AMBER (industrial, bold)
+     --brand:#F59E0B; --brand-2:#FBBF24; --bg:#0A0A0B; --surface:#16171A;
 
-   CYBER BLUE / CYAN
-     --brand:#3B82F6; --brand-2:#22D3EE; --bg:#050A14; --surface:#0C1526;
+   CARBON / EMERALD (technical, sharp)
+     --brand:#10B981; --brand-2:#34D399; --bg:#06100C; --surface:#0D1A14;
 
-   SUNSET ORANGE / ROSE
-     --brand:#F97316; --brand-2:#FB7185; --bg:#0E0705; --surface:#1A0F0A;
+   SLATE / CRIMSON (strong, high contrast)
+     --brand:#DC2626; --brand-2:#F87171; --bg:#0A0708; --surface:#171012;
 
-   GOLD / AMBER (luxury)
-     --brand:#D4A537; --brand-2:#F5D67B; --bg:#0B0A06; --surface:#17140C;
+   NEBULA / VIOLET (previous theme)
+     --brand:#7C5CFF; --brand-2:#FF4D9D; --bg:#07070D; --surface:#10101B;
    ========================================================= */

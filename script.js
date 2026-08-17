@@ -123,9 +123,7 @@ document.querySelectorAll('.bar').forEach(b => barObserver.observe(b));
 const form = document.getElementById('contactForm');
 const note = document.getElementById('formNote');
 
-// Add your email here to enable the mailto flow.
-// While it's empty, the form points people to LinkedIn instead.
-const MY_EMAIL = '';
+const MY_EMAIL = 'zouyaabhussain25@gmail.com';
 const MY_LINKEDIN = 'https://www.linkedin.com/in/zouyaab-hussain-7b8693218';
 
 form.addEventListener('submit', e => {
