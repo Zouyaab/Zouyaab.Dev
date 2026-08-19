@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>OG card source — 1200x630</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#2F6BFF;
+    --brand-2:#22D3EE;
+    --bg:#05070C;
+    --surface:#0C1220;
+    --text:#E8EDF5;
+    --muted:#9AA6B8;
+    --grad:linear-gradient(115deg,var(--brand),var(--brand-2));
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#000;}
+  body{display:flex;align-items:flex-start;justify-content:flex-start;}
+
+  /* Exact Open Graph canvas */
+  .card{
+    position:relative;
+    width:1200px;height:630px;
+    overflow:hidden;
+    background:var(--bg);
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text);
+    padding:72px 80px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+
+  /* glow orbs, same language as the live site */
+  .orb{position:absolute;border-radius:50%;filter:blur(90px);}
+  .orb-1{width:560px;height:560px;background:var(--brand);opacity:.34;top:-220px;left:-160px;}
+  .orb-2{width:460px;height:460px;background:var(--brand-2);opacity:.24;bottom:-210px;right:-120px;}
+
+  /* faint technical grid */
+  .grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(circle at 30% 40%,#000 20%,transparent 78%);
+    -webkit-mask-image:radial-gradient(circle at 30% 40%,#000 20%,transparent 78%);
+  }
+
+  /* top accent bar mirrors the site scroll-progress */
+  .topbar{position:absolute;top:0;left:0;right:0;height:6px;background:var(--grad);}
+
+  .row{position:relative;display:flex;align-items:center;gap:18px;}
+
+  .mark{
+    width:64px;height:64px;border-radius:16px;
+    background:var(--grad);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Sora',sans-serif;font-weight:800;font-size:26px;
+    color:#04060B;letter-spacing:-.02em;
+    box-shadow:0 10px 34px rgba(47,107,255,.42);
+  }
+  .wordmark{font-family:'Sora',sans-serif;font-weight:700;font-size:27px;letter-spacing:-.01em;}
+  .wordmark span{
+    background:var(--grad);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .middle{position:relative;}
+
+  h1{
+    font-family:'Sora',sans-serif;
+    font-weight:800;font-size:82px;line-height:1.02;
+    letter-spacing:-.035em;
+  }
+  .role{
+    margin-top:20px;
+    font-family:'Sora',sans-serif;
+    font-weight:700;font-size:38px;letter-spacing:-.02em;
+    background:var(--grad);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .chips{display:flex;gap:12px;margin-top:30px;}
+  .chip{
+    border:1px solid rgba(255,255,255,.16);
+    background:rgba(255,255,255,.045);
+    border-radius:999px;
+    padding:11px 20px;
+    font-size:19px;font-weight:500;color:#C9D3E2;
+  }
+
+  .bottom{position:relative;display:flex;align-items:center;justify-content:space-between;}
+
+  .status{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:600;color:#DDE5F0;}
+  .dot{
+    width:12px;height:12px;border-radius:50%;
+    background:#34D399;
+    box-shadow:0 0 0 5px rgba(52,211,153,.18);
+  }
+  .url{
+    font-family:'JetBrains Mono',monospace;
+    font-size:20px;font-weight:600;color:var(--muted);
+    letter-spacing:-.01em;
+  }
+</style>
+</head>
+<body>
+  <div class="card" id="card">
+    <span class="topbar"></span>
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="grid"></span>
+
+    <div class="row">
+      <span class="mark">ZH</span>
+      <span class="wordmark">Zouyaab<span>.Dev</span></span>
+    </div>
+
+    <div class="middle">
+      <h1>Zouyaab Hussain</h1>
+      <div class="role">Data Science &amp; AI Automation</div>
+      <div class="chips">
+        <span class="chip">AI Voice Agents</span>
+        <span class="chip">Document AI / OCR</span>
+        <span class="chip">Machine Learning</span>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="status"><span class="dot"></span> Open for freelance work</div>
+      <div class="url">zouyaab.github.io/Zouyaab.Dev</div>
+    </div>
+  </div>
+</body>
+</html>
