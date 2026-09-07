@@ -9,20 +9,35 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
-navToggle.addEventListener('click', () => {
-  const open = navLinks.classList.toggle('open');
+function setNavOpen(open) {
+  navLinks.classList.toggle('open', open);
   navToggle.classList.toggle('open', open);
   navToggle.setAttribute('aria-expanded', String(open));
+  document.body.classList.toggle('nav-open', open);
+}
+
+navToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  setNavOpen(!navLinks.classList.contains('open'));
 });
 
-// close menu after clicking a link
 navLinks.querySelectorAll('a').forEach(a =>
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  })
+  a.addEventListener('click', () => setNavOpen(false))
 );
+
+document.addEventListener('click', (e) => {
+  if (!navLinks.classList.contains('open')) return;
+  if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
+  setNavOpen(false);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') setNavOpen(false);
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 720) setNavOpen(false);
+});
 
 /* ---------- active nav link ---------- */
 const sections = [...document.querySelectorAll('main section[id]')];
