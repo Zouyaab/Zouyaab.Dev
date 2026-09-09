@@ -85,17 +85,21 @@
       <div class="tag-row reveal">
         <span>Machine Learning</span>
         <span>Computer Vision</span>
-        <span>AI Voice Agents</span>
+        <span>Solana</span>
+        <span>Full-stack</span>
         <span>AI Automation</span>
         <span>Python</span>
+        <span>TypeScript</span>
       </div>
 
       <p class="hero-desc reveal">
         I'm a BS Data Science student at IoBM, currently interning at
         <strong>Agency Partner Interactive</strong> — where I build
         <strong>local-first AI systems</strong> that read handwritten medical forms on-device and
-        push clean records into Salesforce. I also build
-        <strong>AI voice agents and automation workflows</strong>, backed by
+        push clean records into Salesforce. I also ship
+        <strong>SolanaGuard</strong> (open-source Solana transaction risk analysis) and a
+        <strong>full-stack project estimation tool</strong> for consulting workflows, plus
+        <strong>AI voice agents</strong> — backed by
         <strong>6+ years in sales and business development</strong>, so I build for the business
         problem, not just the model.
       </p>
@@ -174,7 +178,11 @@ fields, usage = extract_ipr_fields(form)
           threshold, then writes a clean record straight into Salesforce over the REST API.
         </p>
         <p>
-          Alongside that I build predictive models — including a
+          Alongside that I ship <strong>SolanaGuard</strong> — an open-source Solana transaction
+          risk-analysis stack (API, SDK, CLI, dashboard) — and a
+          <strong>full-stack project estimation tool</strong> for consulting workflows (AI scope
+          extraction, role-based effort, profitability and resource calculators). I also build
+          predictive models — including a
           <strong>3-day market direction classifier using an XGBoost + LightGBM ensemble</strong> —
           and <strong>AI voice agents</strong>, such as an appointment setter that qualifies leads
           and books calls on its own.
@@ -272,19 +280,20 @@ fields, usage = extract_ipr_fields(form)
       <div class="skill-col reveal">
         <h4>Engineering</h4>
         <div class="bar" data-level="85"><label>Streamlit <i>85%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="82"><label>Ollama / local LLMs <i>82%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="80"><label>TypeScript / React <i>80%</i></label><div class="track"><span></span></div></div>
+        <div class="bar" data-level="78"><label>Next.js / Fastify <i>78%</i></label><div class="track"><span></span></div></div>
         <div class="bar" data-level="75"><label>REST APIs / OAuth <i>75%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="75"><label>SQL / SQLite <i>75%</i></label><div class="track"><span></span></div></div>
       </div>
 
       <div class="skill-col wide reveal">
         <h4>Core Expertise</h4>
         <div class="pills">
           <span>Machine Learning</span><span>Computer Vision</span><span>Document AI / OCR</span>
+          <span>Solana transaction analysis</span><span>Project estimation systems</span>
           <span>AI voice agents</span><span>AI automation &amp; workflows</span>
-          <span>Chatbots / conversational AI</span><span>Gradient boosting &amp; ensembles</span>
-          <span>Local-first LLM deployment</span><span>Human-in-the-loop review</span>
-          <span>Salesforce integration</span><span>Data analysis</span><span>Big Data</span>
+          <span>Gradient boosting &amp; ensembles</span><span>Local-first LLM deployment</span>
+          <span>Human-in-the-loop review</span><span>Salesforce integration</span>
+          <span>Full-stack product engineering</span>
         </div>
 
         <h4 class="mt">Business &amp; Communication</h4>
@@ -296,10 +305,12 @@ fields, usage = extract_ipr_fields(form)
 
         <h4 class="mt">Tools &amp; Technologies</h4>
         <div class="pills muted">
-          <span>Python</span><span>Pandas</span><span>NumPy</span><span>scikit-learn</span>
+          <span>Python</span><span>TypeScript</span><span>React</span><span>Next.js</span>
+          <span>Fastify</span><span>Solana</span><span>Vitest</span><span>Docker</span>
+          <span>Supabase</span><span>Pandas</span><span>NumPy</span><span>scikit-learn</span>
           <span>XGBoost</span><span>LightGBM</span><span>Streamlit</span><span>Ollama</span>
-          <span>Qwen3-VL</span><span>OpenCV</span><span>SQLite</span><span>Salesforce REST</span>
-          <span>AWS Bedrock</span><span>Git &amp; GitHub</span><span>Google Colab</span><span>Jupyter</span>
+          <span>Qwen3-VL</span><span>SQLite</span><span>Salesforce REST</span>
+          <span>Git &amp; GitHub</span><span>Google Colab</span><span>Jupyter</span>
         </div>
       </div>
     </div>
@@ -312,7 +323,7 @@ fields, usage = extract_ipr_fields(form)
     <span class="eyebrow reveal">Selected Work</span>
     <h2 class="section-title reveal">My Projects</h2>
     <p class="section-sub reveal">
-      Production tools and self-driven builds in machine learning, vision and automation.
+      Production tools and self-driven builds across document AI, Solana tooling, estimation systems and ML.
     </p>
 
     <div class="projects">
@@ -333,13 +344,60 @@ fields, usage = extract_ipr_fields(form)
           <span>Python</span><span>Streamlit</span><span>Ollama</span><span>Qwen3-VL</span>
           <span>Salesforce REST</span><span>SQLite</span>
         </div>
-        <span class="p-private">🔒 Private — client project</span>
+        <a class="p-link" href="https://github.com/Zouyaab/clearscript-IPR" target="_blank" rel="noopener">
+          View on GitHub <span>↗</span>
+        </a>
       </article>
 
       <!-- 02 -->
       <article class="project reveal">
         <div class="p-top">
           <span class="p-num">02</span>
+          <span class="p-ic">⛓️</span>
+        </div>
+        <h3>SolanaGuard</h3>
+        <p>
+          Open-source Solana transaction safety and risk-analysis monorepo: deterministic analyzer
+          and risk engine, Fastify REST API with OpenAPI, TypeScript SDK, CLI, Next.js dashboard,
+          Docker packaging, offline Vitest coverage, structured logging and metrics — reports stay
+          observational, not safety verdicts.
+        </p>
+        <div class="p-tags">
+          <span>TypeScript</span><span>Solana</span><span>Fastify</span><span>Next.js</span>
+          <span>Vitest</span><span>Docker</span>
+        </div>
+        <a class="p-link" href="https://github.com/Zouyaab/solanaguard" target="_blank" rel="noopener">
+          View on GitHub <span>↗</span>
+        </a>
+      </article>
+
+      <!-- 03 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">03</span>
+          <span class="p-ic">📐</span>
+        </div>
+        <h3>Project Estimation Tool</h3>
+        <p>
+          Full-stack AI estimation and profitability OS for consulting workflows: discovery intake
+          (transcripts, notes, documents), structured scope, role-based effort, internal cost vs
+          client price, proposal documents, plus a quick-call resource calculator for backlog
+          throughput, daily intake, working days and clear-by dates — org-isolated workspaces,
+          rate cards and branded UI.
+        </p>
+        <div class="p-tags">
+          <span>React</span><span>TypeScript</span><span>Vite</span><span>Supabase</span>
+          <span>AI estimation</span><span>Profitability</span>
+        </div>
+        <a class="p-link" href="https://github.com/Zouyaab/estimation-tool" target="_blank" rel="noopener">
+          View on GitHub <span>↗</span>
+        </a>
+      </article>
+
+      <!-- 04 -->
+      <article class="project reveal">
+        <div class="p-top">
+          <span class="p-num">04</span>
           <span class="p-ic">📈</span>
         </div>
         <h3>3-Day Market Direction Model</h3>
@@ -356,10 +414,10 @@ fields, usage = extract_ipr_fields(form)
         </a>
       </article>
 
-      <!-- 03 -->
+      <!-- 05 -->
       <article class="project reveal">
         <div class="p-top">
-          <span class="p-num">03</span>
+          <span class="p-num">05</span>
           <span class="p-ic">📞</span>
         </div>
         <h3>AI Voice Agent — Appointment Setter</h3>
@@ -375,10 +433,10 @@ fields, usage = extract_ipr_fields(form)
         <a class="p-link" href="#contact">Available as a service <span>&rarr;</span></a>
       </article>
 
-      <!-- 04 -->
+      <!-- 06 -->
       <article class="project reveal">
         <div class="p-top">
-          <span class="p-num">04</span>
+          <span class="p-num">06</span>
           <span class="p-ic">🛡️</span>
         </div>
         <h3>Human-in-the-Loop Review Gate</h3>
@@ -393,10 +451,10 @@ fields, usage = extract_ipr_fields(form)
         <span class="p-private">🔒 Private — client project</span>
       </article>
 
-      <!-- 05 -->
+      <!-- 07 -->
       <article class="project reveal">
         <div class="p-top">
-          <span class="p-num">05</span>
+          <span class="p-num">07</span>
           <span class="p-ic">📊</span>
         </div>
         <h3>Admin Dashboard &amp; Activity Audit</h3>
@@ -411,10 +469,10 @@ fields, usage = extract_ipr_fields(form)
         <span class="p-private">🔒 Private — client project</span>
       </article>
 
-      <!-- 06 -->
+      <!-- 08 -->
       <article class="project reveal">
         <div class="p-top">
-          <span class="p-num">06</span>
+          <span class="p-num">08</span>
           <span class="p-ic">💰</span>
         </div>
         <h3>AI Cost &amp; Token Analysis</h3>
@@ -429,10 +487,10 @@ fields, usage = extract_ipr_fields(form)
         <span class="p-private">🔒 Internal analysis</span>
       </article>
 
-      <!-- 07 -->
+      <!-- 09 -->
       <article class="project reveal">
         <div class="p-top">
-          <span class="p-num">07</span>
+          <span class="p-num">09</span>
           <span class="p-ic">🧩</span>
         </div>
         <h3>Workflow Mapping &amp; Documentation</h3>
