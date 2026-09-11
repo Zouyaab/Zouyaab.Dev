@@ -1,25 +1,25 @@
 /* =========================================================
    Zouyaab.Dev — portfolio styles
-   THEME: "Titanium" — steel blue + electric cyan on gunmetal
-   To change the whole site colour, swap the 4 vars in
-   :root marked THEME. Alternate palettes at the bottom.
+   THEME: "ZH Emblem" — deep teal + champagne gold on midnight
+   Matches the circular ZH monogram logo.
    ========================================================= */
 
 :root{
-  /* ---- THEME (change these 4) ---- */
-  --brand:      #2F6BFF;   /* primary   */
-  --brand-2:    #22D3EE;   /* accent    */
-  --bg:         #05070C;   /* page base */
-  --surface:    #0C1220;   /* cards     */
+  /* ---- THEME (ZH logo palette) ---- */
+  --brand:      #0E8A84;   /* deep teal from logo center */
+  --brand-2:    #C4A574;   /* champagne gold ring       */
+  --bg:         #060B10;   /* midnight navy             */
+  --surface:    #0C161C;   /* card surface              */
 
   /* derived */
-  --brand-soft: color-mix(in srgb, var(--brand) 16%, transparent);
-  --line:       rgba(255,255,255,.08);
-  --line-2:     rgba(255,255,255,.15);
-  --text:       #E8EDF5;
-  --muted:      #9AA6B8;
-  --muted-2:    #66748A;
-  --grad:       linear-gradient(115deg, var(--brand), var(--brand-2));
+  --brand-soft: color-mix(in srgb, var(--brand) 18%, transparent);
+  --gold-soft:  color-mix(in srgb, var(--brand-2) 18%, transparent);
+  --line:       rgba(196,165,116,.12);
+  --line-2:     rgba(196,165,116,.28);
+  --text:       #F2EFE8;   /* cream / off-white         */
+  --muted:      #A8B4B8;
+  --muted-2:    #6E7E84;
+  --grad:       linear-gradient(125deg, #0A6E6A 0%, #12A39A 48%, #C4A574 100%);
 
   --radius:     16px;
   --radius-lg:  24px;
@@ -68,8 +68,8 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
   animation:float 22s var(--ease) infinite alternate;
 }
 .orb-1{ width:520px; height:520px; background:var(--brand);   top:-160px; left:-120px; }
-.orb-2{ width:440px; height:440px; background:var(--brand-2); top:38%;    right:-140px; animation-delay:-7s; }
-.orb-3{ width:400px; height:400px; background:#00D3C7;        bottom:-140px; left:32%; animation-delay:-13s; opacity:.18; }
+.orb-2{ width:440px; height:440px; background:var(--brand-2); top:38%;    right:-140px; animation-delay:-7s; opacity:.22; }
+.orb-3{ width:400px; height:400px; background:#0A5C58;        bottom:-140px; left:32%; animation-delay:-13s; opacity:.20; }
 @keyframes float{
   from{ transform:translate3d(0,0,0) scale(1); }
   to  { transform:translate3d(40px,-50px,0) scale(1.15); }
@@ -79,20 +79,24 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
 .nav{
   position:fixed; top:0; left:0; right:0; z-index:900;
   backdrop-filter:blur(14px);
-  background:rgba(7,7,13,.6);
+  background:rgba(6,11,16,.62);
   border-bottom:1px solid transparent;
   transition:background .3s, border-color .3s, padding .3s;
   padding:14px 0;
 }
-.nav.scrolled{ background:rgba(7,7,13,.92); border-bottom-color:var(--line); padding:8px 0; }
+.nav.scrolled{ background:rgba(6,11,16,.94); border-bottom-color:var(--line); padding:8px 0; }
 .nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
 
-.logo{ display:flex; align-items:center; gap:10px; font-family:var(--font-head); font-weight:800; }
+.logo{ display:flex; align-items:center; gap:12px; font-family:var(--font-head); font-weight:800; }
 .logo-mark{
-  display:grid; place-items:center; width:36px; height:36px;
-  border-radius:10px; background:var(--grad);
-  font-size:.85rem; letter-spacing:.02em; color:#fff;
-  box-shadow:0 6px 20px -6px var(--brand);
+  display:block; width:40px; height:40px; border-radius:50%;
+  object-fit:cover; flex-shrink:0;
+  box-shadow:0 0 0 1px var(--line-2), 0 8px 22px -8px rgba(14,138,132,.55);
+  transition:transform .25s var(--ease), box-shadow .25s;
+}
+.logo:hover .logo-mark{
+  transform:scale(1.05);
+  box-shadow:0 0 0 1px color-mix(in srgb, var(--brand-2) 55%, transparent), 0 10px 28px -8px rgba(196,165,116,.45);
 }
 .logo-text{ font-size:1.05rem; }
 .accent{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
@@ -205,7 +209,7 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
   margin:0; padding:20px; overflow-x:auto;
   font-family:var(--font-mono); font-size:.8rem; line-height:1.85; color:#C9C9DC;
 }
-.c-key{ color:var(--brand-2); } .c-fn{ color:#5AD8FF; } .c-cmt{ color:var(--muted-2); font-style:italic; }
+.c-key{ color:var(--brand-2); } .c-fn{ color:#5AD4CB; } .c-cmt{ color:var(--muted-2); font-style:italic; }
 .code-foot{ padding:13px 16px; border-top:1px solid var(--line); }
 .chip{
   display:inline-block; padding:5px 11px; border-radius:100px;
@@ -353,7 +357,7 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
 
 .cta-band{
   margin-top:44px; padding:34px 32px; border-radius:var(--radius-lg);
-  background:linear-gradient(120deg, var(--brand-soft), rgba(255,77,157,.10));
+  background:linear-gradient(120deg, var(--brand-soft), var(--gold-soft));
   border:1px solid var(--line-2);
   display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
 }
@@ -433,7 +437,7 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
   transition:border-color .2s, background .2s;
 }
 .contact-form input:focus, .contact-form textarea:focus{
-  outline:none; border-color:var(--brand); background:rgba(124,92,255,.06);
+  outline:none; border-color:var(--brand); background:var(--brand-soft);
 }
 .contact-form textarea{ resize:vertical; }
 .form-note{ font-size:.85rem; margin:12px 0 0; min-height:20px; }
@@ -538,15 +542,15 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
 /* =========================================================
    ALTERNATE PALETTES — copy one block into :root to swap
    ---------------------------------------------------------
+   TITANIUM / CYAN (previous)
+     --brand:#2F6BFF; --brand-2:#22D3EE; --bg:#05070C; --surface:#0C1220;
+
    GUNMETAL / AMBER (industrial, bold)
      --brand:#F59E0B; --brand-2:#FBBF24; --bg:#0A0A0B; --surface:#16171A;
 
    CARBON / EMERALD (technical, sharp)
      --brand:#10B981; --brand-2:#34D399; --bg:#06100C; --surface:#0D1A14;
 
-   SLATE / CRIMSON (strong, high contrast)
-     --brand:#DC2626; --brand-2:#F87171; --bg:#0A0708; --surface:#171012;
-
-   NEBULA / VIOLET (previous theme)
+   NEBULA / VIOLET
      --brand:#7C5CFF; --brand-2:#FF4D9D; --bg:#07070D; --surface:#10101B;
    ========================================================= */
