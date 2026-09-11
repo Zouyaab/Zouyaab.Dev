@@ -694,7 +694,7 @@ fields, usage = extract_ipr_fields(form)
           <li>
             <span class="ci">✉️</span>
             <div><small>Email</small>
-              <a href="mailto:zouyaabhussain25@gmail.com">zouyaabhussain25@gmail.com</a>
+              <a href="mailto:zouyaabh@gmail.com">zouyaabh@gmail.com</a>
             </div>
           </li>
           <li>
@@ -717,7 +717,7 @@ fields, usage = extract_ipr_fields(form)
           </li>
         </ul>
 
-        <a href="mailto:zouyaabhussain25@gmail.com" class="btn btn-primary" style="margin-top:26px">
+        <a href="mailto:zouyaabh@gmail.com" class="btn btn-primary" style="margin-top:26px">
           Email Me <span>&rarr;</span>
         </a>
       </div>
@@ -726,11 +726,11 @@ fields, usage = extract_ipr_fields(form)
         <div class="row">
           <label>
             <span>Your Name</span>
-            <input type="text" name="name" required placeholder="Jane Doe" />
+            <input type="text" name="name" required placeholder="Jane Doe" autocomplete="name" />
           </label>
           <label>
             <span>Email Address</span>
-            <input type="email" name="email" required placeholder="jane@company.com" />
+            <input type="email" name="email" required placeholder="jane@company.com" autocomplete="email" />
           </label>
         </div>
         <label>
@@ -741,6 +741,8 @@ fields, usage = extract_ipr_fields(form)
           <span>Message</span>
           <textarea name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
         </label>
+        <!-- Honeypot for bots — leave empty -->
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <button type="submit" class="btn btn-primary full">Send Message <span>&rarr;</span></button>
         <p class="form-note" id="formNote" role="status"></p>
       </form>
@@ -757,7 +759,7 @@ fields, usage = extract_ipr_fields(form)
       <span>&copy; <span id="year"></span> Zouyaab Hussain</span>
     </div>
     <div class="footer-links">
-      <a href="mailto:zouyaabhussain25@gmail.com">Email</a>
+      <a href="mailto:zouyaabh@gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/Zouyaab" target="_blank" rel="noopener">GitHub</a>
       <a href="#home">Back to top ↑</a>

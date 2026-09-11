@@ -442,6 +442,10 @@ h1,h2,h3,h4{ font-family:var(--font-head); line-height:1.15; margin:0; letter-sp
 .contact-form textarea{ resize:vertical; }
 .form-note{ font-size:.85rem; margin:12px 0 0; min-height:20px; }
 .form-note.ok{ color:#31D67F; } .form-note.err{ color:#FF6B6B; }
+.contact-form button[disabled]{ opacity:.7; cursor:wait; }
+.contact-form .hp{
+  position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;
+}
 
 /* ---------- footer ---------- */
 .footer{ padding:30px 0; border-top:1px solid var(--line); }

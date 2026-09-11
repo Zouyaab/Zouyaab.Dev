@@ -137,15 +137,17 @@ document.querySelectorAll('.bar').forEach(b => barObserver.observe(b));
 /* ---------- contact form ---------- */
 const form = document.getElementById('contactForm');
 const note = document.getElementById('formNote');
+const submitBtn = form.querySelector('button[type="submit"]');
 
-const MY_EMAIL = 'zouyaabhussain25@gmail.com';
-const MY_LINKEDIN = 'https://www.linkedin.com/in/zouyaab-hussain-7b8693218';
+/** Inbox that receives every contact-form submission */
+const MY_EMAIL = 'zouyaabh@gmail.com';
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${MY_EMAIL}`;
 
-form.addEventListener('submit', e => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(form));
-  const missing = ['name', 'email', 'subject', 'message'].filter(k => !data[k]?.trim());
+  const missing = ['name', 'email', 'subject', 'message'].filter((k) => !String(data[k] || '').trim());
 
   if (missing.length) {
     note.textContent = 'Please fill in every field.';
@@ -159,20 +161,55 @@ form.addEventListener('submit', e => {
     return;
   }
 
-  if (!MY_EMAIL) {
-    note.textContent = 'Email isn\u2019t set up yet — opening LinkedIn so you can message me there.';
+  // Honeypot — bots fill this; humans leave it empty.
+  if (data._honey) {
+    note.textContent = 'Message sent. Thank you!';
     note.className = 'form-note ok';
-    window.open(MY_LINKEDIN, '_blank', 'noopener');
+    form.reset();
     return;
   }
 
-  // Opens the visitor's mail client pre-filled.
-  // Swap for Formspree/EmailJS if you want inbox delivery without mail apps.
-  const body = `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`;
-  window.location.href =
-    `mailto:${MY_EMAIL}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(body)}`;
+  const originalLabel = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending…';
+  note.textContent = 'Sending your message…';
+  note.className = 'form-note';
 
-  note.textContent = 'Opening your email app…';
-  note.className = 'form-note ok';
-  form.reset();
+  try {
+    const response = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        name: data.name.trim(),
+        email: data.email.trim(),
+        subject: data.subject.trim(),
+        message: data.message.trim(),
+        _replyto: data.email.trim(),
+        _subject: `Portfolio contact: ${data.subject.trim()}`,
+        _template: 'table',
+        _captcha: 'false',
+      }),
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Could not send message');
+    }
+
+    note.textContent = 'Message sent — I’ll get back to you soon.';
+    note.className = 'form-note ok';
+    form.reset();
+  } catch (err) {
+    note.textContent =
+      'Could not send right now. Email me directly at zouyaabh@gmail.com.';
+    note.className = 'form-note err';
+    console.error(err);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalLabel;
+  }
 });
