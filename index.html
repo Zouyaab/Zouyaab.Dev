@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zouyaab Hussain — Data Science Intern</title>
-<meta name="description" content="Zouyaab Hussain — Data Science Intern in Karachi, available for freelance AI automation: AI voice agents, document AI / OCR, machine learning models and workflow automation." />
+<title>Zouyaab Hussain — AI Engineer &amp; Data Scientist</title>
+<meta name="description" content="Zouyaab Hussain — AI Engineer & Data Scientist in Karachi. Local-first document AI, RAG, machine learning and AI automation. Available for freelance and full-time work." />
 
 <!-- Open Graph (for LinkedIn link previews) -->
-<meta property="og:title" content="Zouyaab Hussain — Data Science Intern" />
-<meta property="og:description" content="Available for freelance AI automation — AI voice agents, document AI / OCR and machine learning builds." />
+<meta property="og:title" content="Zouyaab Hussain — AI Engineer & Data Scientist" />
+<meta property="og:description" content="Local-first document AI, RAG, machine learning and AI automation. Available for freelance and full-time work." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://zouyaab.github.io/Zouyaab.Dev/" />
 <meta property="og:site_name" content="Zouyaab.Dev" />
@@ -22,50 +22,65 @@
 
 <!-- Twitter / X large card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Zouyaab Hussain — Data Science & AI Automation" />
-<meta name="twitter:description" content="Available for freelance AI automation — AI voice agents, document AI / OCR and machine learning builds." />
+<meta name="twitter:title" content="Zouyaab Hussain — AI Engineer & Data Scientist" />
+<meta name="twitter:description" content="Local-first document AI, RAG, machine learning and AI automation. Available for freelance and full-time work." />
 <meta name="twitter:image" content="https://zouyaab.github.io/Zouyaab.Dev/assets/og-image.png" />
 
 <link rel="icon" type="image/png" href="assets/zh-logo.png" />
 <link rel="apple-touch-icon" href="assets/zh-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+
+<!-- Apply saved theme before first paint to avoid a flash -->
+<script>
+  try {
+    var t = localStorage.getItem('theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
 </head>
 <body>
 
-<!-- Scroll progress bar -->
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- Animated background -->
-<div class="bg-orbs" aria-hidden="true">
-  <span class="orb orb-1"></span>
-  <span class="orb orb-2"></span>
-  <span class="orb orb-3"></span>
-</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Zm0 .5 9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+</svg>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="container nav-inner">
     <a href="#home" class="logo">
-      <img class="logo-mark" src="assets/zh-logo.png" width="40" height="40" alt="Zouyaab Hussain monogram" />
-      <span class="logo-text">Zouyaab<span class="accent">.Dev</span></span>
+      <img class="logo-mark" src="assets/zh-logo.png" width="34" height="34" alt="Zouyaab Hussain monogram" />
+      <span class="logo-text">Zouyaab Hussain</span>
     </a>
 
-    <nav class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#about">About</a>
-      <a href="#process">Process</a>
+      <a href="#work">Work</a>
       <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
-      <a href="#contact" class="nav-cta">Contact</a>
+      <a href="#contact">Contact</a>
     </nav>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle colour theme">
+        <svg class="ic-sun"><use href="#i-sun"/></svg>
+        <svg class="ic-moon"><use href="#i-moon"/></svg>
+      </button>
+      <a href="#contact" class="btn btn-primary btn-sm nav-cta">Hire me</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -75,194 +90,275 @@
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <span class="badge reveal">
-        <span class="pulse"></span> Available for freelance &amp; AI automation projects
-      </span>
+      <span class="status reveal"><span class="pulse"></span> Open to freelance projects &amp; full-time roles</span>
 
       <h1 class="reveal">
-        Hi, I'm Zouyaab<br />
-        <span class="gradient-text">a Data Science Intern</span>
+        AI Engineer &amp; Data Scientist building
+        <span class="hl">private, production-ready AI</span> for real business workflows.
       </h1>
 
-      <div class="tag-row reveal">
-        <span>Machine Learning</span>
-        <span>Computer Vision</span>
-        <span>Solana</span>
-        <span>Full-stack</span>
-        <span>Document AI</span>
-        <span>AI Automation</span>
-        <span>Python</span>
-        <span>TypeScript</span>
-      </div>
-
-      <p class="hero-desc reveal">
-        I'm a BS Data Science student at IoBM, currently interning at
-        <strong>Agency Partner Interactive</strong> — where I build
-        <strong>local-first AI systems</strong> that read handwritten medical forms on-device and
-        push clean records into Salesforce. I also ship
-        <strong>SolanaGuard</strong> (open-source Solana transaction risk analysis),
-        <strong>DocMind</strong> (local-first document intelligence &amp; RAG), and a
-        <strong>full-stack project estimation tool</strong> for consulting workflows, plus
-        <strong>AI voice agents</strong> — backed by
-        <strong>6+ years in sales and business development</strong>, so I build for the business
-        problem, not just the model.
+      <p class="lede reveal">
+        I design local-first document AI, RAG systems, predictive models and automation that turn
+        messy real-world inputs into clean, verified data. Six years in sales and business
+        development means I start from the business problem — not the model.
       </p>
 
       <div class="hero-actions reveal">
-        <a href="#projects" class="btn btn-primary">View My Work <span>&rarr;</span></a>
-        <a href="#contact" class="btn btn-ghost">Say Hello</a>
-      </div>
-
-      <div class="stats reveal">
-        <div class="stat">
-          <b data-count="6" data-suffix="+">0</b>
-          <small>Years Professional Experience</small>
-        </div>
-        <div class="stat">
-          <b data-count="100" data-suffix="%">0</b>
-          <small>Local / Private OCR</small>
-        </div>
-        <div class="stat">
-          <b data-count="11160" data-suffix="+">0</b>
-          <small>Forms / Month Modelled</small>
-        </div>
+        <a href="#work" class="btn btn-primary">View selected work <svg><use href="#i-arrow"/></svg></a>
+        <a href="https://github.com/Zouyaab" class="btn btn-ghost" target="_blank" rel="noopener">
+          <svg><use href="#i-github"/></svg> GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" class="btn btn-ghost" target="_blank" rel="noopener">
+          <svg><use href="#i-linkedin"/></svg> LinkedIn
+        </a>
       </div>
     </div>
 
-    <div class="hero-visual reveal">
-      <div class="code-card">
-        <div class="code-head">
-          <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
-          <em>ipr_pipeline.py</em>
-        </div>
-<pre class="code-body"><code><span class="c-key">from</span> ollama_ocr <span class="c-key">import</span> extract_ipr_fields
-
-fields, usage = extract_ipr_fields(form)
-
-<span class="c-cmt"># flag anything the human must check</span>
-<span class="c-key">for</span> f <span class="c-key">in</span> fields:
-    <span class="c-key">if</span> f.confidence &lt;= threshold:
-        f.<span class="c-fn">flag_for_review</span>()
-
-<span class="c-key">if</span> all_verified(fields):
-    <span class="c-fn">send_to_salesforce</span>(fields)</code></pre>
-        <div class="code-foot">
-          <span class="chip">PHI never leaves the machine</span>
+    <aside class="profile reveal" aria-label="Profile summary">
+      <div class="profile-head">
+        <img src="assets/zh-logo.png" width="56" height="56" alt="" />
+        <div>
+          <b>Zouyaab Hussain</b>
+          <span><svg><use href="#i-pin"/></svg> Karachi, Pakistan</span>
         </div>
       </div>
-    </div>
+      <dl class="profile-list">
+        <div><dt>Now</dt><dd>Building document AI at Agency Partner Interactive</dd></div>
+        <div><dt>Focus</dt><dd>Document AI · RAG · ML · Automation</dd></div>
+        <div><dt>Study</dt><dd>BS Data Science, IoBM</dd></div>
+      </dl>
+      <div class="stats">
+        <div><b data-count="6" data-suffix="+">6+</b><small>Years professional</small></div>
+        <div><b data-count="11" data-suffix="">11</b><small>Projects shipped</small></div>
+        <div><b data-count="100" data-suffix="%">100%</b><small>On-device OCR</small></div>
+      </div>
+    </aside>
   </div>
-
-  <a href="#about" class="scroll-hint" aria-label="Scroll down">
-    <span class="mouse"></span>
-  </a>
 </section>
 
 <!-- ============ ABOUT ============ -->
 <section class="section" id="about">
-  <div class="container">
-    <span class="eyebrow reveal">About Me</span>
-    <h2 class="section-title reveal">Who I Am</h2>
-
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>
-          I'm a Data Science student at the <strong>Institute of Business Management (IoBM)</strong>
-          in Karachi, with over <strong>6 years of professional experience in sales and business
-          development</strong> behind me. That background sharpened my communication,
-          problem-solving and client-focused thinking — and it's why I care whether a model
-          actually solves the business problem.
-        </p>
-        <p>
-          As a <strong>Data Science Intern at Agency Partner Interactive</strong>, I'm building the
-          <strong>IPR digitization platform</strong>: a Streamlit application that
-          turns messy handwritten medical forms into structured, validated data. It runs a
-          <strong>Qwen3-VL vision model locally through Ollama</strong>, scores every extracted
-          field for confidence, forces a human to verify anything below an admin-configurable
-          threshold, then writes a clean record straight into Salesforce over the REST API.
-        </p>
-        <p>
-          Alongside that I ship <strong>SolanaGuard</strong> — an open-source Solana transaction
-          risk-analysis stack (API, SDK, CLI, dashboard) —
-          <strong>DocMind</strong>, a local-first TypeScript monorepo for document intelligence
-          (ingestion, RAG with citations, deterministic decisions, Postgres/pgvector, Docker) —
-          and a <strong>full-stack project estimation tool</strong> for consulting workflows
-          (AI scope extraction, role-based effort, profitability and resource calculators). I also
-          build predictive models — including a
-          <strong>3-day market direction classifier using an XGBoost + LightGBM ensemble</strong> —
-          and <strong>AI voice agents</strong>, such as an appointment setter that qualifies leads
-          and books calls on its own.
-        </p>
-        <p>
-          I'm <strong>available for freelance work</strong> and can deliver
-          <strong>AI automation of almost any kind</strong>: voice agents, chatbots, document
-          processing, data pipelines and workflow integrations that remove manual steps.
-        </p>
-
-        <div class="about-info">
-          <div><span>Location</span><b>Karachi, Pakistan</b></div>
-          <div><span>Focus</span><b>Data Science &amp; AI</b></div>
-          <div><span>Studying</span><b>BS Data Science, IoBM</b></div>
-          <div><span>Languages</span><b>English, Urdu</b></div>
-        </div>
-      </div>
-
-      <div class="about-cards">
-        <article class="glass-card reveal">
-          <div class="ic">🔒</div>
-          <h4>Privacy-first AI</h4>
-          <p>On-device inference so protected health information never leaves the machine.</p>
-        </article>
-        <article class="glass-card reveal">
-          <div class="ic">👁️</div>
-          <h4>Vision &amp; OCR</h4>
-          <p>Reading real handwriting — not clean scans — with confidence scoring per field.</p>
-        </article>
-        <article class="glass-card reveal">
-          <div class="ic">📈</div>
-          <h4>Predictive Modelling</h4>
-          <p>Gradient-boosted ensembles, feature engineering and honest evaluation.</p>
-        </article>
-        <article class="glass-card reveal">
-          <div class="ic">⚙️</div>
-          <h4>AI Automation</h4>
-          <p>Voice agents, chatbots and workflows that replace repetitive manual work.</p>
-        </article>
-      </div>
+  <div class="container about-grid">
+    <div class="section-head reveal">
+      <span class="eyebrow">01 — About</span>
+      <h2>Technical depth, business instinct.</h2>
     </div>
+
+    <div class="about-text reveal">
+      <p>
+        I'm a Data Science student at the <strong>Institute of Business Management (IoBM)</strong>
+        in Karachi with over <strong>six years of professional experience</strong> in sales and
+        business development. That background shapes how I build: requirements first, measurable
+        outcomes, and systems a team can actually run.
+      </p>
+      <p>
+        At <strong>Agency Partner Interactive</strong> I'm building an IPR digitization platform that
+        reads handwritten medical forms with a <strong>Qwen3-VL vision model running locally through
+        Ollama</strong>, scores every field for confidence, gates low-confidence values behind human
+        review and writes verified records straight into Salesforce.
+      </p>
+      <p>
+        Outside of that I ship open-source tooling — <strong>SolanaGuard</strong>,
+        <strong>DocMind</strong>, a <strong>project estimation platform</strong> and a
+        <strong>tournament game-AI bot</strong> — plus gradient-boosted market models and AI voice
+        agents for clients.
+      </p>
+    </div>
+
+    <ul class="services">
+      <li class="reveal">
+        <span class="svc-num">A</span>
+        <h3>Document AI &amp; OCR</h3>
+        <p>Vision models that read real handwriting, with per-field confidence and human review.</p>
+      </li>
+      <li class="reveal">
+        <span class="svc-num">B</span>
+        <h3>RAG &amp; LLM systems</h3>
+        <p>Local-first retrieval with citations, provenance and prompt-injection defences.</p>
+      </li>
+      <li class="reveal">
+        <span class="svc-num">C</span>
+        <h3>Predictive modelling</h3>
+        <p>Feature engineering, gradient-boosted ensembles and honest evaluation.</p>
+      </li>
+      <li class="reveal">
+        <span class="svc-num">D</span>
+        <h3>AI automation</h3>
+        <p>Voice agents, chatbots and integrations that remove repetitive manual work.</p>
+      </li>
+    </ul>
   </div>
 </section>
 
-<!-- ============ PROCESS ============ -->
-<section class="section alt" id="process">
+<!-- ============ SELECTED WORK ============ -->
+<section class="section alt" id="work">
   <div class="container">
-    <span class="eyebrow reveal">How I Work</span>
-    <h2 class="section-title reveal">My Development Process</h2>
-    <p class="section-sub reveal">
-      Every build starts with the real constraint — privacy, accuracy or cost — and ends with
-      something a team can actually run.
-    </p>
+    <div class="section-head split reveal">
+      <div>
+        <span class="eyebrow">02 — Selected work</span>
+        <h2>Projects</h2>
+      </div>
+      <p>Production tools and self-driven builds across document AI, RAG, blockchain tooling, game AI and machine learning.</p>
+    </div>
 
-    <div class="steps">
-      <article class="step reveal">
-        <span class="step-num">01</span>
-        <h4>Understand</h4>
-        <p>Map the workflow and the hard constraints: compliance, accuracy targets, where data may live.</p>
+    <div class="featured">
+      <!-- IPR -->
+      <article class="feature reveal">
+        <div class="feature-main">
+          <div class="feature-meta"><span>Document AI</span><span>Healthcare · Client work</span></div>
+          <h3>IPR Digitization Platform</h3>
+          <p>
+            Streamlit platform that reads handwritten Implantable Prosthesis Report forms with a local
+            Qwen3-VL vision model, scores every field, forces human verification below an
+            admin-set threshold, then creates the record in Salesforce — with per-form token
+            tracking and a full activity audit.
+          </p>
+          <ul class="tags">
+            <li>Python</li><li>Streamlit</li><li>Ollama</li><li>Qwen3-VL</li><li>Salesforce REST</li><li>SQLite</li>
+          </ul>
+          <a class="link" href="https://github.com/Zouyaab/clearscript-IPR" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> View repository <svg class="sm"><use href="#i-ext"/></svg>
+          </a>
+        </div>
+        <dl class="feature-stats">
+          <div><dt>100%</dt><dd>On-device — PHI never leaves the machine</dd></div>
+          <div><dt>11,160+</dt><dd>Forms per month modelled</dd></div>
+          <div><dt>Human gate</dt><dd>Send blocked until every flagged field is verified</dd></div>
+        </dl>
       </article>
-      <article class="step reveal">
-        <span class="step-num">02</span>
-        <h4>Prototype</h4>
-        <p>Get a working model on real, messy inputs fast — measure accuracy before polishing anything.</p>
+
+      <!-- VibeWars -->
+      <article class="feature reveal">
+        <div class="feature-main">
+          <div class="feature-meta"><span>Game AI</span><span>TechFest '26 · NED University</span><span class="new">New</span></div>
+          <h3>Vibe Wars Bot — “Opportunist”</h3>
+          <p>
+            Tournament bot for Vibe Wars, a four-bot arena battle on a walled 12×12 map over 40 turns.
+            A prioritised rule engine dodges blasts, takes favourable melee, fires ranged items and
+            chases objectives by value ÷ distance, using BFS pathing and BLINK teleports. Every
+            action is checked against a mirror of the engine's validator, and all decisions are
+            deterministic.
+          </p>
+          <ul class="tags">
+            <li>Python</li><li>Game AI</li><li>BFS pathfinding</li><li>Rule-based agents</li><li>Fuzz testing</li><li>Simulation</li>
+          </ul>
+          <a class="link" href="https://github.com/Zouyaab/VibeWars_bot" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> View repository <svg class="sm"><use href="#i-ext"/></svg>
+          </a>
+        </div>
+        <dl class="feature-stats">
+          <div><dt>174 / 180</dt><dd>Wins vs chaos sparring bots, 0 illegal moves</dd></div>
+          <div><dt>~1.9</dt><dd>Rank points per map across 5 opponent fields (1.5 = average)</dd></div>
+          <div><dt>~0.5 ms</dt><dd>Average decision time per turn (limit 200 ms)</dd></div>
+        </dl>
       </article>
-      <article class="step reveal">
-        <span class="step-num">03</span>
-        <h4>Add the Human Gate</h4>
-        <p>Confidence scoring, review flags and explicit approval so nothing wrong reaches production.</p>
+
+      <!-- SolanaGuard -->
+      <article class="feature reveal">
+        <div class="feature-main">
+          <div class="feature-meta"><span>Blockchain tooling</span><span>Open source</span></div>
+          <h3>SolanaGuard</h3>
+          <p>
+            Solana transaction safety and risk-analysis monorepo: a deterministic analyzer and risk
+            engine, Fastify REST API with OpenAPI, TypeScript SDK, CLI and Next.js dashboard —
+            Docker-packaged with offline Vitest coverage, structured logging and metrics.
+          </p>
+          <ul class="tags">
+            <li>TypeScript</li><li>Solana</li><li>Fastify</li><li>Next.js</li><li>Vitest</li><li>Docker</li>
+          </ul>
+          <a class="link" href="https://github.com/Zouyaab/solanaguard" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> View repository <svg class="sm"><use href="#i-ext"/></svg>
+          </a>
+        </div>
+        <dl class="feature-stats">
+          <div><dt>4 surfaces</dt><dd>API, SDK, CLI and dashboard over one engine</dd></div>
+          <div><dt>Deterministic</dt><dd>Reproducible risk reports, observational not verdicts</dd></div>
+          <div><dt>Offline CI</dt><dd>Full test suite runs without network access</dd></div>
+        </dl>
       </article>
-      <article class="step reveal">
-        <span class="step-num">04</span>
-        <h4>Ship &amp; Measure</h4>
-        <p>Integrate, log every action, track token cost, then tune thresholds from real usage.</p>
+
+      <!-- DocMind -->
+      <article class="feature reveal">
+        <div class="feature-main">
+          <div class="feature-meta"><span>RAG</span><span>Open source</span></div>
+          <h3>DocMind</h3>
+          <p>
+            Local-first document intelligence and decision engine: secure ingestion, chunking with
+            provenance, RAG Q&amp;A with citations and prompt-injection defences, deterministic
+            decision rules and Postgres/pgvector persistence — with SDK, CLI, Vite dashboard and
+            Docker Compose. Mock AI by default, optional Ollama.
+          </p>
+          <ul class="tags">
+            <li>TypeScript</li><li>Fastify</li><li>RAG</li><li>pgvector</li><li>Docker</li><li>Vitest</li>
+          </ul>
+          <a class="link" href="https://github.com/Zouyaab/docmind" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> View repository <svg class="sm"><use href="#i-ext"/></svg>
+          </a>
+        </div>
+        <dl class="feature-stats">
+          <div><dt>Cited answers</dt><dd>Every response traces back to its source chunk</dd></div>
+          <div><dt>Local-first</dt><dd>Runs fully offline with Ollama or mock AI</dd></div>
+          <div><dt>pgvector</dt><dd>Postgres-native vector search and persistence</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <h3 class="subhead reveal">More projects</h3>
+    <div class="cards">
+      <article class="card reveal">
+        <span class="card-cat">Full-stack · Consulting</span>
+        <h4>Project Estimation Tool</h4>
+        <p>AI estimation and profitability OS: discovery intake, structured scope, role-based effort, cost vs price, proposals and a resource calculator.</p>
+        <ul class="tags sm"><li>React</li><li>TypeScript</li><li>Supabase</li></ul>
+        <a class="link" href="https://github.com/Zouyaab/estimation-tool" target="_blank" rel="noopener">Repository <svg class="sm"><use href="#i-ext"/></svg></a>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-cat">Machine learning</span>
+        <h4>3-Day Market Direction Model</h4>
+        <p>Predicts 3-day UP/DOWN market direction with an XGBoost + LightGBM ensemble over engineered multi-indicator features.</p>
+        <ul class="tags sm"><li>XGBoost</li><li>LightGBM</li><li>Colab</li></ul>
+        <a class="link" href="https://github.com/Zouyaab/3d-market-direction-model" target="_blank" rel="noopener">Repository <svg class="sm"><use href="#i-ext"/></svg></a>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-cat">AI automation</span>
+        <h4>AI Voice Agent — Appointment Setter</h4>
+        <p>Handles inbound and outbound calls to qualify leads and book appointments — natural speech, real-time responses, calendar booking.</p>
+        <ul class="tags sm"><li>Speech-to-Text</li><li>LLM</li><li>Calendar API</li></ul>
+        <a class="link" href="#contact">Available as a service <svg class="sm"><use href="#i-arrow"/></svg></a>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-cat">UX safety</span>
+        <h4>Human-in-the-Loop Review Gate</h4>
+        <p>Fields at or below a configurable confidence threshold are locked until a reviewer corrects and confirms them.</p>
+        <ul class="tags sm"><li>Streamlit</li><li>Session state</li></ul>
+        <span class="private"><svg><use href="#i-lock"/></svg> Client project</span>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-cat">Observability</span>
+        <h4>Admin Dashboard &amp; Activity Audit</h4>
+        <p>Role-based view over sign-ins, Salesforce approvals, token usage and threshold changes — each logged with old and new values.</p>
+        <ul class="tags sm"><li>SQLite</li><li>RBAC</li><li>Audit logging</li></ul>
+        <span class="private"><svg><use href="#i-lock"/></svg> Client project</span>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-cat">Analysis</span>
+        <h4>AI Cost &amp; Token Analysis</h4>
+        <p>Modelled monthly cost of hosted Qwen3-VL 235B on AWS Bedrock vs local inference — an executive brief covering HIPAA and pay-per-use.</p>
+        <ul class="tags sm"><li>AWS Bedrock</li><li>Cost modelling</li></ul>
+        <span class="private"><svg><use href="#i-lock"/></svg> Internal analysis</span>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-cat">System design</span>
+        <h4>Workflow Mapping &amp; Docs</h4>
+        <p>End-to-end diagrams of the digitization pipeline — actors, automation, decision gates — kept in Mermaid alongside the code.</p>
+        <ul class="tags sm"><li>Mermaid</li><li>Documentation</li></ul>
+        <span class="private"><svg><use href="#i-lock"/></svg> Internal documentation</span>
       </article>
     </div>
   </div>
@@ -271,306 +367,64 @@ fields, usage = extract_ipr_fields(form)
 <!-- ============ SKILLS ============ -->
 <section class="section" id="skills">
   <div class="container">
-    <span class="eyebrow reveal">Technical Skills</span>
-    <h2 class="section-title reveal">My Expertise</h2>
-
-    <div class="skills-grid">
-      <div class="skill-col reveal">
-        <h4>Data Science &amp; ML</h4>
-        <div class="bar" data-level="85"><label>Python <i>85%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="85"><label>Pandas / NumPy <i>85%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="80"><label>XGBoost / LightGBM <i>80%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="80"><label>Vision models / OCR <i>80%</i></label><div class="track"><span></span></div></div>
-      </div>
-
-      <div class="skill-col reveal">
-        <h4>Engineering</h4>
-        <div class="bar" data-level="85"><label>Streamlit <i>85%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="80"><label>TypeScript / React <i>80%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="78"><label>Next.js / Fastify <i>78%</i></label><div class="track"><span></span></div></div>
-        <div class="bar" data-level="75"><label>REST APIs / OAuth <i>75%</i></label><div class="track"><span></span></div></div>
-      </div>
-
-      <div class="skill-col wide reveal">
-        <h4>Core Expertise</h4>
-        <div class="pills">
-          <span>Machine Learning</span><span>Computer Vision</span><span>Document AI / OCR</span>
-          <span>RAG &amp; document intelligence</span>
-          <span>Solana transaction analysis</span><span>Project estimation systems</span>
-          <span>AI voice agents</span><span>AI automation &amp; workflows</span>
-          <span>Gradient boosting &amp; ensembles</span><span>Local-first LLM deployment</span>
-          <span>Human-in-the-loop review</span><span>Salesforce integration</span>
-          <span>Full-stack product engineering</span>
-        </div>
-
-        <h4 class="mt">Business &amp; Communication</h4>
-        <div class="pills">
-          <span>Business development</span><span>Client communication</span>
-          <span>Requirements gathering</span><span>Stakeholder management</span>
-          <span>Sales &amp; negotiation</span><span>Data-driven decision making</span>
-        </div>
-
-        <h4 class="mt">Tools &amp; Technologies</h4>
-        <div class="pills muted">
-          <span>Python</span><span>TypeScript</span><span>React</span><span>Next.js</span>
-          <span>Fastify</span><span>Solana</span><span>Vitest</span><span>Docker</span>
-          <span>Supabase</span><span>Pandas</span><span>NumPy</span><span>scikit-learn</span>
-          <span>XGBoost</span><span>LightGBM</span><span>Streamlit</span><span>Ollama</span>
-          <span>Qwen3-VL</span><span>SQLite</span><span>PostgreSQL / pgvector</span>
-          <span>pnpm</span><span>Salesforce REST</span>
-          <span>Git &amp; GitHub</span><span>Google Colab</span><span>Jupyter</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROJECTS ============ -->
-<section class="section alt" id="projects">
-  <div class="container">
-    <span class="eyebrow reveal">Selected Work</span>
-    <h2 class="section-title reveal">My Projects</h2>
-    <p class="section-sub reveal">
-      Production tools and self-driven builds across document AI, RAG, Solana tooling, estimation systems and ML.
-    </p>
-
-    <div class="projects">
-      <!-- 01 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">01</span>
-          <span class="p-ic">🏥</span>
-        </div>
-        <h3>IPR Digitization</h3>
-        <p>
-          Streamlit platform that reads handwritten Implantable Prosthesis Report forms with a
-          local Qwen3-VL vision model, scores every field, forces human verification below an
-          admin-set threshold, then creates the record in Salesforce. Tracks input/output tokens
-          per form and logs all activity for an admin dashboard.
-        </p>
-        <div class="p-tags">
-          <span>Python</span><span>Streamlit</span><span>Ollama</span><span>Qwen3-VL</span>
-          <span>Salesforce REST</span><span>SQLite</span>
-        </div>
-        <a class="p-link" href="https://github.com/Zouyaab/clearscript-IPR" target="_blank" rel="noopener">
-          View on GitHub <span>↗</span>
-        </a>
-      </article>
-
-      <!-- 02 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">02</span>
-          <span class="p-ic">⛓️</span>
-        </div>
-        <h3>SolanaGuard</h3>
-        <p>
-          Open-source Solana transaction safety and risk-analysis monorepo: deterministic analyzer
-          and risk engine, Fastify REST API with OpenAPI, TypeScript SDK, CLI, Next.js dashboard,
-          Docker packaging, offline Vitest coverage, structured logging and metrics — reports stay
-          observational, not safety verdicts.
-        </p>
-        <div class="p-tags">
-          <span>TypeScript</span><span>Solana</span><span>Fastify</span><span>Next.js</span>
-          <span>Vitest</span><span>Docker</span>
-        </div>
-        <a class="p-link" href="https://github.com/Zouyaab/solanaguard" target="_blank" rel="noopener">
-          View on GitHub <span>↗</span>
-        </a>
-      </article>
-
-      <!-- 03 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">03</span>
-          <span class="p-ic">📄</span>
-        </div>
-        <h3>DocMind</h3>
-        <p>
-          Local-first AI document intelligence &amp; decision engine: TypeScript monorepo with
-          Fastify API, secure ingestion, extraction/chunking with provenance, RAG Q&amp;A with
-          citations and prompt-injection defenses, deterministic decision rules, Postgres/pgvector
-          persistence, SDK, CLI, Vite dashboard, Docker Compose, and offline CI — mock AI by
-          default, optional Ollama.
-        </p>
-        <div class="p-tags">
-          <span>TypeScript</span><span>Fastify</span><span>RAG</span><span>pgvector</span>
-          <span>Docker</span><span>Vitest</span>
-        </div>
-        <a class="p-link" href="https://github.com/Zouyaab/docmind" target="_blank" rel="noopener">
-          View on GitHub <span>↗</span>
-        </a>
-      </article>
-
-      <!-- 04 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">04</span>
-          <span class="p-ic">📐</span>
-        </div>
-        <h3>Project Estimation Tool</h3>
-        <p>
-          Full-stack AI estimation and profitability OS for consulting workflows: discovery intake
-          (transcripts, notes, documents), structured scope, role-based effort, internal cost vs
-          client price, proposal documents, plus a quick-call resource calculator for backlog
-          throughput, daily intake, working days and clear-by dates — org-isolated workspaces,
-          rate cards and branded UI.
-        </p>
-        <div class="p-tags">
-          <span>React</span><span>TypeScript</span><span>Vite</span><span>Supabase</span>
-          <span>AI estimation</span><span>Profitability</span>
-        </div>
-        <a class="p-link" href="https://github.com/Zouyaab/estimation-tool" target="_blank" rel="noopener">
-          View on GitHub <span>↗</span>
-        </a>
-      </article>
-
-      <!-- 05 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">05</span>
-          <span class="p-ic">📈</span>
-        </div>
-        <h3>3-Day Market Direction Model</h3>
-        <p>
-          Colab notebook that predicts 3-day UP/DOWN market direction using an
-          <strong>XGBoost + LightGBM ensemble</strong> — feature engineering across multiple
-          indicators, model training and evaluation of directional accuracy.
-        </p>
-        <div class="p-tags">
-          <span>Python</span><span>XGBoost</span><span>LightGBM</span><span>Jupyter</span><span>Colab</span>
-        </div>
-        <a class="p-link" href="https://github.com/Zouyaab/3d-market-direction-model" target="_blank" rel="noopener">
-          View on GitHub <span>↗</span>
-        </a>
-      </article>
-
-      <!-- 06 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">06</span>
-          <span class="p-ic">📞</span>
-        </div>
-        <h3>AI Voice Agent — Appointment Setter</h3>
-        <p>
-          Conversational AI voice agent that handles inbound and outbound calls to qualify leads
-          and book appointments automatically — natural speech, real-time responses, and calendar
-          booking without a human on the line.
-        </p>
-        <div class="p-tags">
-          <span>AI Voice Agents</span><span>Speech-to-Text</span><span>LLM</span>
-          <span>Automation</span><span>Calendar API</span>
-        </div>
-        <a class="p-link" href="#contact">Available as a service <span>&rarr;</span></a>
-      </article>
-
-      <!-- 07 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">07</span>
-          <span class="p-ic">🛡️</span>
-        </div>
-        <h3>Human-in-the-Loop Review Gate</h3>
-        <p>
-          Confidence-based validation layer: any field at or below a configurable threshold is
-          framed red and locked until a reviewer corrects and ticks it. The send action stays
-          disabled until every flagged field is verified — turning green only when safe.
-        </p>
-        <div class="p-tags">
-          <span>Streamlit</span><span>Session state</span><span>Custom CSS</span><span>UX safety</span>
-        </div>
-        <span class="p-private">🔒 Private — client project</span>
-      </article>
-
-      <!-- 08 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">08</span>
-          <span class="p-ic">📊</span>
-        </div>
-        <h3>Admin Dashboard &amp; Activity Audit</h3>
-        <p>
-          Role-based admin view over a local SQLite log: who signed in, who approved each
-          Salesforce send, token usage per run, and a control to raise or lower the review
-          confidence threshold — every change logged with old and new values.
-        </p>
-        <div class="p-tags">
-          <span>SQLite</span><span>Role-based access</span><span>Audit logging</span><span>Metrics</span>
-        </div>
-        <span class="p-private">🔒 Private — client project</span>
-      </article>
-
-      <!-- 09 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">09</span>
-          <span class="p-ic">💰</span>
-        </div>
-        <h3>AI Cost &amp; Token Analysis</h3>
-        <p>
-          Measured real token consumption per document, then modelled the monthly cost of running
-          a larger hosted vision model (Qwen3-VL 235B on AWS Bedrock) against local inference —
-          delivered as an executive brief covering HIPAA and pay-per-use implications.
-        </p>
-        <div class="p-tags">
-          <span>AWS Bedrock</span><span>Cost modelling</span><span>Token metrics</span><span>Reporting</span>
-        </div>
-        <span class="p-private">🔒 Internal analysis</span>
-      </article>
-
-      <!-- 10 -->
-      <article class="project reveal">
-        <div class="p-top">
-          <span class="p-num">10</span>
-          <span class="p-ic">🧩</span>
-        </div>
-        <h3>Workflow Mapping &amp; Documentation</h3>
-        <p>
-          End-to-end process diagrams of the digitization pipeline — actors, automation, decision
-          gates and signals — rendered from Mermaid source so the architecture stays
-          version-controlled alongside the code.
-        </p>
-        <div class="p-tags">
-          <span>Mermaid</span><span>System design</span><span>Documentation</span>
-        </div>
-        <span class="p-private">🔒 Internal documentation</span>
-      </article>
-    </div>
-
-    <div class="cta-band reveal">
+    <div class="section-head split reveal">
       <div>
-        <h3>Available for freelance work</h3>
-        <p>
-          AI automation, AI voice agents, document AI and machine learning — I take on freelance
-          projects alongside my current role.
-        </p>
+        <span class="eyebrow">03 — Capabilities</span>
+        <h2>Skills &amp; tooling</h2>
       </div>
-      <a href="#contact" class="btn btn-primary">Let's Work Together <span>&rarr;</span></a>
+      <p>Every build starts with the real constraint — privacy, accuracy or cost — and ends with something a team can run.</p>
+    </div>
+
+    <div class="skills">
+      <div class="skill-group reveal">
+        <h3>Data science &amp; ML</h3>
+        <ul class="tags"><li>Python</li><li>Pandas</li><li>NumPy</li><li>scikit-learn</li><li>XGBoost</li><li>LightGBM</li><li>Jupyter</li><li>Colab</li></ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>AI &amp; LLM systems</h3>
+        <ul class="tags"><li>Vision models / OCR</li><li>Qwen3-VL</li><li>Ollama</li><li>RAG</li><li>pgvector</li><li>Voice agents</li><li>Game AI</li></ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Engineering</h3>
+        <ul class="tags"><li>TypeScript</li><li>React</li><li>Next.js</li><li>Fastify</li><li>Streamlit</li><li>Vitest</li><li>Docker</li><li>pnpm</li></ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Data &amp; integrations</h3>
+        <ul class="tags"><li>PostgreSQL</li><li>SQLite</li><li>Supabase</li><li>Salesforce REST</li><li>OAuth</li><li>Solana</li><li>Git &amp; GitHub</li></ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Business</h3>
+        <ul class="tags"><li>Business development</li><li>Requirements gathering</li><li>Stakeholder management</li><li>Sales &amp; negotiation</li><li>Client communication</li></ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>How I work</h3>
+        <ol class="process">
+          <li><b>Understand</b> the workflow and hard constraints</li>
+          <li><b>Prototype</b> on real, messy inputs and measure</li>
+          <li><b>Gate</b> with confidence scores and human review</li>
+          <li><b>Ship</b>, log every action, tune from usage</li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ EXPERIENCE ============ -->
-<section class="section" id="experience">
-  <div class="container">
-    <span class="eyebrow reveal">Work History</span>
-    <h2 class="section-title reveal">Experience</h2>
+<section class="section alt" id="experience">
+  <div class="container exp-grid">
+    <div class="section-head reveal">
+      <span class="eyebrow">04 — Experience</span>
+      <h2>Work history</h2>
+      <p>Six years of client-facing work, now applied to building AI products.</p>
+    </div>
 
-    <div class="timeline">
-      <article class="tl-item reveal">
-        <div class="tl-dot"></div>
+    <ol class="timeline">
+      <li class="reveal">
+        <div class="tl-date">Jul 2026 — Present<span class="current">Current</span></div>
         <div class="tl-body">
-          <div class="tl-meta">
-            <span class="tl-date">Jul 2026 — Present · Part-time · On-site</span>
-            <span class="tag-live">Current</span>
-          </div>
-          <h4>Data Science Intern</h4>
-          <span class="tl-org">Agency Partner Interactive</span>
-          <p>
-            Building the IPR digitization platform end to end: local vision-model
-            OCR, confidence-based human review, Salesforce record creation, token tracking,
-            activity auditing and an admin dashboard.
-          </p>
+          <h3>Data Science Intern</h3>
+          <span class="tl-org">Agency Partner Interactive · Part-time · On-site</span>
+          <p>Building the IPR digitization platform end to end: local vision-model OCR, confidence-based human review, Salesforce record creation, token tracking, activity auditing and an admin dashboard.</p>
           <ul>
             <li>Deployed a local Qwen3-VL pipeline so patient data never leaves the machine</li>
             <li>Designed the review gate that blocks sending until every low-confidence field is verified</li>
@@ -578,99 +432,59 @@ fields, usage = extract_ipr_fields(form)
             <li>Added token accounting and an executive cost model for hosted alternatives</li>
           </ul>
         </div>
-      </article>
-
-      <article class="tl-item reveal">
-        <div class="tl-dot"></div>
+      </li>
+      <li class="reveal">
+        <div class="tl-date">Mar 2026 — Present<span class="current">Current</span></div>
         <div class="tl-body">
-          <div class="tl-meta">
-            <span class="tl-date">Mar 2026 — Present · Part-time · Remote</span>
-            <span class="tag-live">Current</span>
-          </div>
-          <h4>Senior Sales Executive</h4>
-          <span class="tl-org">ASA Global Digital</span>
-          <p>
-            Managing remote sales conversations end to end — qualifying inbound interest,
-            understanding client requirements and closing digital service engagements.
-          </p>
+          <h3>Senior Sales Executive</h3>
+          <span class="tl-org">ASA Global Digital · Part-time · Remote</span>
+          <p>Managing remote sales conversations end to end — qualifying inbound interest, scoping client requirements and closing digital service engagements.</p>
         </div>
-      </article>
-
-      <article class="tl-item reveal">
-        <div class="tl-dot"></div>
+      </li>
+      <li class="reveal">
+        <div class="tl-date">Jan 2024 — Jul 2026</div>
         <div class="tl-body">
-          <div class="tl-meta">
-            <span class="tl-date">Jan 2024 — Jul 2026 · Full-time · On-site</span>
-          </div>
-          <h4>Senior Front Sales Executive</h4>
-          <span class="tl-org">Salsoft Technologies (Pvt) Ltd</span>
-          <p>
-            Two and a half years owning front-line sales for technology services — consultative
-            pitching, requirement scoping with clients and consistent quota delivery.
-          </p>
+          <h3>Senior Front Sales Executive</h3>
+          <span class="tl-org">Salsoft Technologies (Pvt) Ltd · Full-time</span>
+          <p>Owned front-line sales for technology services — consultative pitching, requirement scoping and consistent quota delivery.</p>
         </div>
-      </article>
-
-      <article class="tl-item reveal">
-        <div class="tl-dot"></div>
+      </li>
+      <li class="reveal">
+        <div class="tl-date">Jan 2023 — Jan 2024</div>
         <div class="tl-body">
-          <div class="tl-meta">
-            <span class="tl-date">Jan 2023 — Jan 2024 · Full-time · On-site</span>
-          </div>
-          <h4>Business Development Executive</h4>
-          <span class="tl-org">Appedology Pvt. Ltd.</span>
-          <p>
-            Generated and developed new business opportunities, building pipelines and translating
-            client needs into service proposals.
-          </p>
+          <h3>Business Development Executive</h3>
+          <span class="tl-org">Appedology Pvt. Ltd. · Full-time</span>
+          <p>Generated new business, built pipelines and translated client needs into service proposals.</p>
         </div>
-      </article>
-
-      <article class="tl-item reveal">
-        <div class="tl-dot"></div>
+      </li>
+      <li class="reveal">
+        <div class="tl-date">Aug 2021 — Jul 2022</div>
         <div class="tl-body">
-          <div class="tl-meta">
-            <span class="tl-date">Aug 2021 — Jul 2022 · Full-time</span>
-          </div>
-          <h4>Inbound Sales Specialist</h4>
-          <span class="tl-org">ePlanet Communications Inc</span>
-          <p>
-            Handled high-volume inbound sales and customer conversations, building the
-            communication foundation the rest of my career is built on.
-          </p>
+          <h3>Inbound Sales Specialist</h3>
+          <span class="tl-org">ePlanet Communications Inc · Full-time</span>
+          <p>Handled high-volume inbound sales and customer conversations.</p>
         </div>
-      </article>
-    </div>
+      </li>
+    </ol>
   </div>
-</section>
 
-<!-- ============ EDUCATION ============ -->
-<section class="section alt" id="education">
   <div class="container">
-    <span class="eyebrow reveal">Academic Background</span>
-    <h2 class="section-title reveal">Education</h2>
-
+    <h3 class="subhead reveal" id="education">Education</h3>
     <div class="edu-grid">
       <article class="edu reveal">
-        <span class="edu-num">01</span>
         <h4>BS Data Science</h4>
-        <span class="edu-org">Institute of Business Management (IoBM)</span>
-        <p>Sep 2024 — Sep 2028</p>
-        <p class="edu-note">Computer and Information Sciences &amp; Support Services</p>
+        <span>Institute of Business Management (IoBM)</span>
+        <small>Sep 2024 — Sep 2028</small>
       </article>
       <article class="edu reveal">
-        <span class="edu-num">02</span>
         <h4>Intermediate — Computer Science</h4>
-        <span class="edu-org">Government National College, Karachi</span>
-        <p>Dec 2020 — Dec 2022</p>
-        <p class="edu-note">Grade: A</p>
+        <span>Government National College, Karachi</span>
+        <small>2020 — 2022 · Grade A</small>
       </article>
       <article class="edu reveal">
-        <span class="edu-num">03</span>
         <h4>O'Levels — Computer Science</h4>
-        <span class="edu-org">Chapter and Verse School</span>
-        <p>2018 — 2020</p>
-        <p class="edu-note">Grade: A</p>
+        <span>Chapter and Verse School</span>
+        <small>2018 — 2020 · Grade A</small>
       </article>
     </div>
   </div>
@@ -678,75 +492,47 @@ fields, usage = extract_ipr_fields(form)
 
 <!-- ============ CONTACT ============ -->
 <section class="section" id="contact">
-  <div class="container">
-    <span class="eyebrow reveal">Get In Touch</span>
-    <h2 class="section-title reveal">Let's Work Together</h2>
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">05 — Contact</span>
+      <h2>Let's build something useful.</h2>
+      <p>
+        Available for freelance work — AI automation, voice agents, document AI and machine
+        learning — and open to data science and AI engineering roles.
+      </p>
 
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <p>
-          <strong>I'm available for freelance work</strong> — AI automation, AI voice agents,
-          document AI and machine learning builds. I'm also open to data science roles and
-          collaborations.
-        </p>
-
-        <ul class="contact-list">
-          <li>
-            <span class="ci">✉️</span>
-            <div><small>Email</small>
-              <a href="mailto:zouyaabh@gmail.com">zouyaabh@gmail.com</a>
-            </div>
-          </li>
-          <li>
-            <span class="ci">💼</span>
-            <div><small>LinkedIn</small>
-              <a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener">
-                zouyaab-hussain
-              </a>
-            </div>
-          </li>
-          <li>
-            <span class="ci">🐙</span>
-            <div><small>GitHub</small>
-              <a href="https://github.com/Zouyaab" target="_blank" rel="noopener">github.com/Zouyaab</a>
-            </div>
-          </li>
-          <li>
-            <span class="ci">📍</span>
-            <div><small>Location</small><b>Karachi, Sindh, Pakistan</b></div>
-          </li>
-        </ul>
-
-        <a href="mailto:zouyaabh@gmail.com" class="btn btn-primary" style="margin-top:26px">
-          Email Me <span>&rarr;</span>
-        </a>
-      </div>
-
-      <form class="contact-form reveal" id="contactForm" novalidate>
-        <div class="row">
-          <label>
-            <span>Your Name</span>
-            <input type="text" name="name" required placeholder="Jane Doe" autocomplete="name" />
-          </label>
-          <label>
-            <span>Email Address</span>
-            <input type="email" name="email" required placeholder="jane@company.com" autocomplete="email" />
-          </label>
-        </div>
-        <label>
-          <span>Subject</span>
-          <input type="text" name="subject" required placeholder="Project enquiry" />
-        </label>
-        <label>
-          <span>Message</span>
-          <textarea name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
-        </label>
-        <!-- Honeypot for bots — leave empty -->
-        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <button type="submit" class="btn btn-primary full">Send Message <span>&rarr;</span></button>
-        <p class="form-note" id="formNote" role="status"></p>
-      </form>
+      <ul class="contact-list">
+        <li><svg><use href="#i-mail"/></svg><a href="mailto:zouyaabh@gmail.com">zouyaabh@gmail.com</a></li>
+        <li><svg><use href="#i-linkedin"/></svg><a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener">linkedin.com/in/zouyaab-hussain</a></li>
+        <li><svg><use href="#i-github"/></svg><a href="https://github.com/Zouyaab" target="_blank" rel="noopener">github.com/Zouyaab</a></li>
+        <li><svg><use href="#i-pin"/></svg><span>Karachi, Sindh, Pakistan</span></li>
+      </ul>
     </div>
+
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="row">
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" required placeholder="Jane Doe" autocomplete="name" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required placeholder="jane@company.com" autocomplete="email" />
+        </label>
+      </div>
+      <label>
+        <span>Subject</span>
+        <input type="text" name="subject" required placeholder="Project enquiry" />
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="5" required placeholder="Tell me about your project…"></textarea>
+      </label>
+      <!-- Honeypot for bots — leave empty -->
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit" class="btn btn-primary full">Send message <svg><use href="#i-arrow"/></svg></button>
+      <p class="form-note" id="formNote" role="status"></p>
+    </form>
   </div>
 </section>
 
@@ -755,7 +541,7 @@ fields, usage = extract_ipr_fields(form)
 <footer class="footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <img src="assets/zh-logo.png" width="28" height="28" alt="" aria-hidden="true" />
+      <img src="assets/zh-logo.png" width="24" height="24" alt="" aria-hidden="true" />
       <span>&copy; <span id="year"></span> Zouyaab Hussain</span>
     </div>
     <div class="footer-links">

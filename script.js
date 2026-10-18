@@ -36,7 +36,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 720) setNavOpen(false);
+  if (window.innerWidth > 760) setNavOpen(false);
 });
 
 /* ---------- active nav link ---------- */
@@ -56,16 +56,11 @@ function setActiveLink() {
   linkMap.forEach((a, id) => a.classList.toggle('active', id === current));
 }
 
-/* ---------- nav background + scroll progress ---------- */
+/* ---------- nav border on scroll ---------- */
 const nav = document.getElementById('nav');
-const progress = document.getElementById('scrollProgress');
 
 function onScroll() {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.width = h > 0 ? `${(window.scrollY / h) * 100}%` : '0%';
-
+  nav.classList.toggle('scrolled', window.scrollY > 20);
   setActiveLink();
 }
 window.addEventListener('scroll', onScroll, { passive: true });
@@ -118,21 +113,17 @@ function animateCount(el) {
   requestAnimationFrame(tick);
 }
 
-/* ---------- skill bars ---------- */
-const barObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const bar = entry.target;
-      const level = bar.dataset.level || 0;
-      bar.querySelector('.track span').style.width = `${level}%`;
-      barObserver.unobserve(bar);
-    });
-  },
-  { threshold: 0.4 }
-);
+/* ---------- theme toggle ---------- */
+const themeToggle = document.getElementById('themeToggle');
+const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-document.querySelectorAll('.bar').forEach(b => barObserver.observe(b));
+themeToggle.addEventListener('click', () => {
+  const current =
+    document.documentElement.getAttribute('data-theme') || (darkQuery.matches ? 'dark' : 'light');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch (e) {}
+});
 
 /* ---------- contact form ---------- */
 const form = document.getElementById('contactForm');
