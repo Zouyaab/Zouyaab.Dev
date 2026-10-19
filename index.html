@@ -741,6 +741,8 @@
     model.rotation.y = BASE_YAW;
     scene.add(model);
 
+    // remember the rest (T-pose) finger rotations so the waving hand can open flat
+    Object.keys(bones).forEach(k => { if (/^LeftHand(Index|Middle|Ring|Pinky)[123]$/.test(k)) fingerRest.push([bones[k], bones[k].quaternion.clone()]); });
     mixer = new THREE.AnimationMixer(model);
     const idle = gltf.animations.find(a => /idle/i.test(a.name));
     if (idle) mixer.clipAction(idle).play();
@@ -783,18 +785,59 @@
   // masculine proportions: broad chest and shoulders, slimmer hips
   const BUILD = { Hips: [0.84, 1, 0.9], Spine: [1.02, 1, 1.0], Spine1: [1.14, 1.03, 1.12], Spine2: [1.28, 1.04, 1.16], Neck: [0.92, 1, 0.94], Head: [1.05, 1.05, 1.05], LeftUpLeg: [1.12, 1, 1.08], RightUpLeg: [1.12, 1, 1.08] };
 
-  const WAVE = { arm: [0.25, 0, 1.05], fore: [0, 0, 1.75], swing: [0, 0, 0.2], hand: [0, 0, 0] };
+  // wave: aim the left arm bones at world-space directions so the palm always faces the viewer
+  const fingerRest = [];
+  const _wq = new THREE.Quaternion(), _pq = new THREE.Quaternion(), _dq = new THREE.Quaternion();
+  const _m1 = new THREE.Matrix4(), _m2 = new THREE.Matrix4();
+  const _hp = new THREE.Vector3(), _view = new THREE.Vector3(), Z = new THREE.Vector3(0, 0, 1);
+  const UPPER = new THREE.Vector3(0.72, -0.5, 0.32).normalize();
+  const FORE = new THREE.Vector3(0.1, 1, 0.12).normalize();
+  function setWorldQuat(bone, qWorld) {
+    bone.parent.getWorldQuaternion(_pq);
+    bone.quaternion.copy(_pq.invert().multiply(qWorld));
+    bone.updateMatrixWorld(true);
+  }
+  // rotate a bone so the direction to its child points along `dir`
+  function aim(bone, child, dir) {
+    bone.getWorldQuaternion(_wq);
+    const axis = child.position.clone().normalize().applyQuaternion(_wq);
+    _dq.setFromUnitVectors(axis, dir);
+    setWorldQuat(bone, _dq.multiply(_wq));
+  }
+  // orient the hand: fingers along `fingers`, palm facing `toward`
+  function orientHand(hand, fingers, toward) {
+    const xL = bones.LeftHandMiddle1.position.clone().normalize();
+    const nL = new THREE.Vector3(0, -1, 0).addScaledVector(xL, xL.y).normalize();
+    const aL = new THREE.Vector3().crossVectors(xL, nL);
+    const nW = toward.clone().addScaledVector(fingers, -toward.dot(fingers)).normalize();
+    const aW = new THREE.Vector3().crossVectors(fingers, nW);
+    _m1.makeBasis(fingers, nW, aW);
+    _m2.makeBasis(xL, nL, aL).transpose();
+    _wq.setFromRotationMatrix(_m1.multiply(_m2));
+    setWorldQuat(hand, _wq);
+  }
+  function wave(t) {
+    const { LeftArm, LeftForeArm, LeftHand } = bones;
+    if (!LeftArm || !LeftForeArm || !LeftHand) return;
+    model.updateMatrixWorld(true);
+    const sway = Math.sin(t * 3.4);
+    aim(LeftArm, LeftForeArm, UPPER);
+    aim(LeftForeArm, LeftHand, FORE.clone().applyAxisAngle(Z, sway * 0.22));
+    LeftHand.getWorldPosition(_hp);
+    _view.copy(camera.position).sub(_hp).normalize();
+    const fingers = FORE.clone().applyAxisAngle(Z, sway * 0.22 + Math.sin(t * 3.4 - 0.5) * 0.3);
+    orientHand(LeftHand, fingers, _view);
+    fingerRest.forEach(([b, q]) => b.quaternion.copy(q));
+  }
+
   function pose(t) {
     if (!model) return;
     for (const k in BUILD) bones[k] && bones[k].scale.set(...BUILD[k]);
     // wave with the robot's left hand, look toward the cursor
-    const W = WAVE, w = Math.sin(t * 3.2);
-    nudge(bones.LeftArm, W.arm[0], W.arm[1], W.arm[2]);
-    nudge(bones.LeftForeArm, W.fore[0] + w * W.swing[0], W.fore[1] + w * W.swing[1], W.fore[2] + w * W.swing[2]);
-    nudge(bones.LeftHand, W.hand[0], W.hand[1], W.hand[2] + Math.sin(t * 3.2 - 0.6) * 0.2);
     nudge(bones.Neck, mouse.y * 0.15, mouse.x * 0.35, 0);
     nudge(bones.Head, mouse.y * 0.12, mouse.x * 0.25, 0);
     model.rotation.y += ((BASE_YAW + mouse.x * 0.1) - model.rotation.y) * 0.03;
+    wave(t);
     if (eyeStrip) { eyeStrip.material.opacity = 0.6 + Math.sin(t * 4) * 0.3; eyeStrip.position.y = Math.sin(t * 1.5) * 0.02; }
     dust.rotation.y = t * 0.02;
   }
