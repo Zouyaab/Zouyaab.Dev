@@ -656,9 +656,10 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script>
 (() => {
-  if (!window.THREE) return;
+  if (!window.THREE || !THREE.GLTFLoader) return;
   const canvas = document.getElementById('robot');
   const stage = document.getElementById('stage');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -667,12 +668,12 @@
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.95;
+  renderer.toneMappingExposure = 0.92;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  const camera = new THREE.PerspectiveCamera(28, 1, 0.05, 50);
 
-  // studio reflections: hot softboxes in a black room give the liquid-chrome look
+  // studio reflections: bright softboxes in a black room give the liquid-chrome look
   const pmrem = new THREE.PMREMGenerator(renderer);
   const env = new THREE.Scene();
   env.background = new THREE.Color(0x020202);
@@ -680,154 +681,40 @@
     const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: c, side: THREE.DoubleSide }));
     m.position.set(...pos); m.rotation.set(...rot); env.add(m);
   };
-  const hot = new THREE.Color(2.6, 2.4, 2.5), warm = new THREE.Color(2.2, 1.4, 1.5);
-  box(10, 1.2, hot, [0, 6, 0], [Math.PI / 2, 0, 0]);
-  box(1.2, 8, warm, [-6, 0, 2], [0, Math.PI / 2, 0]);
-  box(0.8, 8, hot, [6, 1, -1], [0, -Math.PI / 2, 0]);
-  box(4, 4, new THREE.Color(0.5, 0.35, 0.4), [0, 0, 7], [0, Math.PI, 0]);
-  box(14, 2, new THREE.Color(0.5, 0.05, 0.12), [0, -5, 0], [-Math.PI / 2, 0, 0]);
-  box(1.5, 1.5, hot, [3, 3, 5], [0, Math.PI, 0]);
+  box(10, 1.2, new THREE.Color(3, 2.8, 2.9), [0, 6, 0], [Math.PI / 2, 0, 0]);
+  box(1.2, 8, new THREE.Color(2.6, 1.7, 1.8), [-6, 0, 2], [0, Math.PI / 2, 0]);
+  box(0.8, 8, new THREE.Color(3, 2.8, 2.9), [6, 1, -1], [0, -Math.PI / 2, 0]);
+  box(5, 5, new THREE.Color(0.55, 0.4, 0.45), [0, 0, 7], [0, Math.PI, 0]);
+  box(14, 2, new THREE.Color(0.45, 0.04, 0.1), [0, -5, 0], [-Math.PI / 2, 0, 0]);
+  box(1.4, 1.4, new THREE.Color(4, 3.8, 3.9), [3, 3, 5], [0, Math.PI, 0]);
+  box(0.4, 6, new THREE.Color(3, 2.6, 2.7), [-3, 2, 5], [0, Math.PI, 0.4]);
   scene.environment = pmrem.fromScene(env, 0.015).texture;
 
-  // materials — burgundy liquid chrome
-  const shell = new THREE.MeshPhysicalMaterial({ color: 0x6e0f22, metalness: 1, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.08 });
-  const joint = new THREE.MeshPhysicalMaterial({ color: 0x3a0712, metalness: 1, roughness: 0.25, clearcoat: 0.6 });
-  const dark = new THREE.MeshStandardMaterial({ color: 0x1a0408, metalness: 1, roughness: 0.3 });
-  const glass = new THREE.MeshPhysicalMaterial({ color: 0x0a0103, metalness: 0.95, roughness: 0.04, clearcoat: 1 });
+  // burgundy liquid chrome
+  const shell = new THREE.MeshPhysicalMaterial({ color: 0x5c0a1c, metalness: 1, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.06, skinning: true });
+  const joints = new THREE.MeshPhysicalMaterial({ color: 0x2c050d, metalness: 1, roughness: 0.28, clearcoat: 0.5, skinning: true });
+  const visorShell = new THREE.MeshPhysicalMaterial({ color: 0x5c0a1c, metalness: 1, roughness: 0.12, clearcoat: 1 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0x050002, metalness: 0.9, roughness: 0.03, clearcoat: 1 });
+  const visorGlass = new THREE.MeshPhysicalMaterial({ color: 0x0a0104, metalness: 1, roughness: 0.04, clearcoat: 1, skinning: true });
 
-  const add = (parent, geo, mat, pos = [0, 0, 0], rot = [0, 0, 0], scale = [1, 1, 1]) => {
-    const m = new THREE.Mesh(geo, mat);
-    m.position.set(...pos); m.rotation.set(...rot); m.scale.set(...scale);
-    parent.add(m); return m;
-  };
-  // capsule pointing down -y from the local origin
-  const limb = (parent, r1, r2, len, mat) => {
-    add(parent, new THREE.CylinderGeometry(r1, r2, len, 40, 1, true), mat, [0, -len / 2, 0]);
-    add(parent, new THREE.SphereGeometry(r1, 40, 24), mat);
-    add(parent, new THREE.SphereGeometry(r2, 40, 24), mat, [0, -len, 0]);
-  };
-  const lathe = (pts, segs = 72) => new THREE.LatheGeometry(pts.map(([x, y]) => new THREE.Vector2(x, y)), segs);
-
-  const robot = new THREE.Group();
-  scene.add(robot);
-
-  // ---- torso ----
-  const torso = new THREE.Group();
-  robot.add(torso);
-  add(torso, lathe([[0, 1.05], [0.42, 1.02], [0.78, 0.9], [0.95, 0.6], [0.92, 0.2], [0.78, -0.25], [0.6, -0.6], [0, -0.65]]), shell, [0, 0, 0], [0, 0, 0], [1, 1, 0.62]);
-  // pec plates
-  [-1, 1].forEach(s => add(torso, new THREE.SphereGeometry(0.42, 48, 32), shell, [s * 0.36, 0.48, 0.32], [0, 0, 0], [1.05, 0.62, 0.45]));
-  // abdomen rings
-  for (let i = 0; i < 5; i++) {
-    add(torso, new THREE.TorusGeometry(0.5 - i * 0.015, 0.075, 16, 64), i % 2 ? joint : shell, [0, -0.66 - i * 0.13, 0], [Math.PI / 2, 0, 0], [1, 0.66, 1]);
-  }
-  add(torso, new THREE.CylinderGeometry(0.42, 0.4, 0.7, 40), dark, [0, -0.95, 0], [0, 0, 0], [1, 1, 0.66]);
-  add(torso, lathe([[0, -1.3], [0.62, -1.32], [0.7, -1.6], [0.66, -2.1], [0, -2.1]]), shell, [0, 0, 0], [0, 0, 0], [1, 1, 0.66]);
-
-  // ---- neck: ribbed, like a hose ----
-  const neck = new THREE.Group();
-  neck.position.set(0, 0.92, -0.02);
-  torso.add(neck);
-  add(neck, new THREE.CylinderGeometry(0.13, 0.15, 0.62, 24), dark, [0, 0.3, 0]);
-  for (let i = 0; i < 6; i++) add(neck, new THREE.TorusGeometry(0.17, 0.045, 12, 40), i % 2 ? joint : shell, [0, 0.04 + i * 0.085, 0], [Math.PI / 2, 0, 0]);
-
-  // ---- head with VR-style visor ----
-  const head = new THREE.Group();
-  head.position.set(0, 0.5, 0.02);
-  head.scale.setScalar(1.45);
-  neck.add(head);
-  add(head, new THREE.SphereGeometry(0.46, 64, 48), shell, [0, 0.36, -0.06], [0, 0, 0], [0.92, 1, 1.05]);
-  add(head, new THREE.SphereGeometry(0.28, 48, 32), shell, [0, 0.0, 0.12], [0, 0, 0], [1, 0.9, 1.1]); // jaw
-  const visorShape = new THREE.Shape();
-  const vw = 0.9, vh = 0.42, vr = 0.15;
-  visorShape.moveTo(-vw / 2 + vr, -vh / 2);
-  visorShape.lineTo(vw / 2 - vr, -vh / 2); visorShape.quadraticCurveTo(vw / 2, -vh / 2, vw / 2, -vh / 2 + vr);
-  visorShape.lineTo(vw / 2, vh / 2 - vr); visorShape.quadraticCurveTo(vw / 2, vh / 2, vw / 2 - vr, vh / 2);
-  visorShape.lineTo(-vw / 2 + vr, vh / 2); visorShape.quadraticCurveTo(-vw / 2, vh / 2, -vw / 2, vh / 2 - vr);
-  visorShape.lineTo(-vw / 2, -vh / 2 + vr); visorShape.quadraticCurveTo(-vw / 2, -vh / 2, -vw / 2 + vr, -vh / 2);
-  const visorGeo = new THREE.ExtrudeGeometry(visorShape, { depth: 0.34, bevelEnabled: true, bevelThickness: 0.09, bevelSize: 0.08, bevelSegments: 10, curveSegments: 24 });
-  visorGeo.center();
-  add(head, visorGeo, shell, [0, 0.38, 0.36]);
-  add(head, new THREE.PlaneGeometry(vw * 0.86, vh * 0.7), glass, [0, 0.38, 0.62]);
-  const eyeStrip = add(head, new THREE.PlaneGeometry(vw * 0.7, 0.03), new THREE.MeshBasicMaterial({ color: 0xff3a5c, transparent: true, opacity: 0.9 }), [0, 0.38, 0.625]);
-  add(head, new THREE.TorusGeometry(0.47, 0.05, 16, 64), joint, [0, 0.4, -0.02], [Math.PI / 2, 0, 0], [0.95, 1.1, 1]); // strap
-  add(head, new THREE.TorusGeometry(0.46, 0.045, 16, 64, Math.PI), joint, [0, 0.36, -0.05], [0, Math.PI / 2, 0]); // top strap
-  [-1, 1].forEach(s => add(head, new THREE.CylinderGeometry(0.12, 0.12, 0.08, 32), dark, [s * 0.44, 0.38, 0], [0, 0, Math.PI / 2]));
-
-  // ---- arms ----
-  function arm(side) {
-    const sh = new THREE.Group();
-    sh.position.set(side * 1.0, 0.72, 0);
-    torso.add(sh);
-    add(sh, new THREE.SphereGeometry(0.44, 48, 32), shell, [side * 0.06, 0.06, 0], [0, 0, 0], [1, 0.95, 0.95]); // shoulder cap
-    limb(sh, 0.27, 0.22, 0.95, shell);
-    for (let i = 0; i < 3; i++) add(sh, new THREE.TorusGeometry(0.24, 0.035, 10, 32), joint, [0, -0.32 - i * 0.07, 0], [Math.PI / 2, 0, 0]);
-    const el = new THREE.Group();
-    el.position.y = -0.95;
-    sh.add(el);
-    add(el, new THREE.SphereGeometry(0.25, 40, 24), joint);
-    limb(el, 0.23, 0.16, 0.9, shell);
-    const wr = new THREE.Group();
-    wr.position.y = -0.95;
-    wr.scale.setScalar(1.35);
-    el.add(wr);
-    add(wr, new THREE.SphereGeometry(0.1, 24, 16), joint, [0, 0.04, 0]);
-    // palm (faces +z) and fingers along -y
-    add(wr, new THREE.BoxGeometry(0.34, 0.36, 0.12), shell, [0, -0.2, 0]);
-    add(wr, new THREE.SphereGeometry(0.19, 32, 20), shell, [0, -0.2, 0], [0, 0, 0], [0.95, 1.05, 0.38]);
-    const fingers = [];
-    [-0.12, -0.04, 0.04, 0.12].forEach((x, i) => {
-      const f = new THREE.Group();
-      f.position.set(x, -0.38, 0);
-      f.rotation.z = x * 0.6;
-      wr.add(f);
-      const l1 = [0.15, 0.19, 0.18, 0.13][i];
-      limb(f, 0.038, 0.034, l1, shell);
-      const k = new THREE.Group(); k.position.y = -l1; f.add(k);
-      limb(k, 0.033, 0.028, l1 * 0.8, shell);
-      fingers.push(f, k);
-    });
-    const th = new THREE.Group();
-    th.position.set(side * -0.17, -0.12, 0.02);
-    th.rotation.z = side * -0.9;
-    wr.add(th);
-    limb(th, 0.045, 0.034, 0.18, shell);
-    const thk = new THREE.Group(); thk.position.y = -0.18; th.add(thk);
-    limb(thk, 0.034, 0.028, 0.13, shell);
-    return { sh, el, wr, fingers };
-  }
-  // robot's left hand (viewer's right) waves; the other hangs relaxed
-  const wave = arm(1);
-  const rest = arm(-1);
-  wave.sh.rotation.set(0, 0, 1.15);
-  wave.el.rotation.set(0, 0, 1.95);
-  wave.wr.rotation.set(0, 0, 0.1);
-  rest.sh.rotation.set(0.15, 0, -0.18);
-  rest.el.rotation.set(-0.45, 0, 0.05);
-  rest.wr.rotation.set(0, 0, -0.1);
-  rest.fingers.forEach((f, i) => { f.rotation.x = i % 2 ? 0.7 : 0.5; });
+  const key = new THREE.DirectionalLight(0xffe6ea, 0.7); key.position.set(-2, 4, 4); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xc0384f, 2); rim.position.set(3, 2, -3); scene.add(rim);
 
   // floating dust
   const N = 380, arr = new Float32Array(N * 3);
-  for (let i = 0; i < N; i++) { arr[i * 3] = (Math.random() - .5) * 16; arr[i * 3 + 1] = (Math.random() - .5) * 10; arr[i * 3 + 2] = (Math.random() - .5) * 8 - 3; }
+  for (let i = 0; i < N; i++) { arr[i * 3] = (Math.random() - .5) * 8; arr[i * 3 + 1] = Math.random() * 4; arr[i * 3 + 2] = (Math.random() - .5) * 4 - 2; }
   const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(arr, 3));
-  const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xc0384f, size: 0.025, transparent: true, opacity: 0.6 }));
+  const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xc0384f, size: 0.012, transparent: true, opacity: 0.6 }));
   scene.add(dust);
-
-  // a little direct light for punchier highlights
-  const key = new THREE.DirectionalLight(0xffe6ea, 0.6); key.position.set(-3, 5, 6); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xc0384f, 1.6); rim.position.set(5, 2, -4); scene.add(rim);
-
-  robot.rotation.y = -0.18;
 
   function resize() {
     const w = stage.clientWidth, h = stage.clientHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     const mobile = w < 900;
-    camera.position.set(0, 1.1, mobile ? 12.5 : 10);
-    camera.lookAt(0, 1.1, 0);
-    camera.setViewOffset(w, h, mobile ? -w * 0.04 : -w * 0.16, mobile ? -h * 0.02 : h * 0.06, w, h);
+    camera.position.set(0, 1.5, mobile ? 3.4 : 2.75);
+    camera.lookAt(0, 1.45, 0);
+    camera.setViewOffset(w, h, mobile ? -w * 0.03 : -w * 0.2, mobile ? -h * 0.02 : h * 0.04, w, h);
     camera.updateProjectionMatrix();
   }
   addEventListener('resize', resize);
@@ -836,37 +723,95 @@
   const mouse = { x: 0, y: 0 };
   addEventListener('pointermove', e => { mouse.x = e.clientX / innerWidth * 2 - 1; mouse.y = e.clientY / innerHeight * 2 - 1; });
 
-  let running = true, visible = true, raf;
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && running && !reduce) loop(); }).observe(stage);
-  window.__robotStop = () => { running = false; cancelAnimationFrame(raf); };
-
+  let model, mixer, bones = {}, eyeStrip;
   const clock = new THREE.Clock();
+  const q = new THREE.Quaternion(), e3 = new THREE.Euler();
+  // add an extra local rotation on top of whatever the idle animation set
+  const nudge = (bone, x, y, z) => { if (!bone) return; e3.set(x, y, z); q.setFromEuler(e3); bone.quaternion.multiply(q); };
+
+  new THREE.GLTFLoader().load('assets/xbot.glb', gltf => {
+    model = gltf.scene;
+    model.traverse(o => {
+      if (o.isSkinnedMesh) {
+        o.material = /visor/i.test(o.name) ? visorGlass : /joint/i.test(o.name) ? joints : shell;
+        o.frustumCulled = false;
+      }
+      if (o.isBone) bones[o.name.replace('mixamorig', '')] = o;
+    });
+    model.rotation.y = BASE_YAW;
+    scene.add(model);
+
+    mixer = new THREE.AnimationMixer(model);
+    const idle = gltf.animations.find(a => /idle/i.test(a.name));
+    if (idle) mixer.clipAction(idle).play();
+    mixer.update(0);
+    model.updateMatrixWorld(true);
+
+    // VR-style visor strapped to the head bone
+    const head = bones.Head;
+    if (head) {
+      const vw = 0.2, vh = 0.1, vr = 0.035;
+      const s = new THREE.Shape();
+      s.moveTo(-vw / 2 + vr, -vh / 2); s.lineTo(vw / 2 - vr, -vh / 2); s.quadraticCurveTo(vw / 2, -vh / 2, vw / 2, -vh / 2 + vr);
+      s.lineTo(vw / 2, vh / 2 - vr); s.quadraticCurveTo(vw / 2, vh / 2, vw / 2 - vr, vh / 2);
+      s.lineTo(-vw / 2 + vr, vh / 2); s.quadraticCurveTo(-vw / 2, vh / 2, -vw / 2, vh / 2 - vr);
+      s.lineTo(-vw / 2, -vh / 2 + vr); s.quadraticCurveTo(-vw / 2, -vh / 2, -vw / 2 + vr, -vh / 2);
+      const g = new THREE.ExtrudeGeometry(s, { depth: 0.07, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.018, bevelSegments: 8, curveSegments: 16 });
+      g.center();
+      const visor = new THREE.Group();
+      visor.add(new THREE.Mesh(g, visorShell));
+      const pane = new THREE.Mesh(new THREE.PlaneGeometry(vw * 0.86, vh * 0.66), glass);
+      pane.position.z = 0.056; visor.add(pane);
+      eyeStrip = new THREE.Mesh(new THREE.PlaneGeometry(vw * 0.7, 0.006), new THREE.MeshBasicMaterial({ color: 0xff3a5c, transparent: true, opacity: 0.9 }));
+      eyeStrip.position.z = 0.057; visor.add(eyeStrip);
+      const strap = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.012, 12, 48), joints.clone());
+      strap.material.skinning = false;
+      strap.rotation.x = Math.PI / 2; strap.scale.set(1, 1.15, 1); strap.position.z = -0.07;
+      visor.add(strap);
+      // place in world space in front of the face, then parent to the head so it follows
+      const hp = new THREE.Vector3(); head.getWorldPosition(hp);
+      visor.position.set(hp.x, hp.y + 0.07, hp.z);
+      visor.quaternion.copy(model.quaternion);
+      visor.translateZ(0.085);
+      scene.add(visor);
+      head.attach(visor);
+    }
+    if (!reduce) loop(); else { pose(0); renderer.render(scene, camera); }
+  });
+
+  const BASE_YAW = -0.25;
+  // masculine proportions: broad chest and shoulders, slimmer hips
+  const BUILD = { Hips: [0.84, 1, 0.9], Spine: [1.02, 1, 1.0], Spine1: [1.14, 1.03, 1.12], Spine2: [1.28, 1.04, 1.16], Neck: [0.92, 1, 0.94], Head: [1.05, 1.05, 1.05], LeftUpLeg: [1.12, 1, 1.08], RightUpLeg: [1.12, 1, 1.08] };
+
+  const WAVE = { arm: [0.25, 0, 1.05], fore: [0, 0, 1.75], swing: [0, 0, 0.2], hand: [0, 0, 0] };
   function pose(t) {
-    // breathing + sway
-    torso.position.y = Math.sin(t * 1.1) * 0.03;
-    torso.rotation.z = Math.sin(t * 0.5) * 0.025;
-    robot.rotation.y += ((-0.18 + mouse.x * 0.12) - robot.rotation.y) * 0.03;
-    // head follows the cursor
-    head.rotation.y += ((mouse.x * 0.5 + Math.sin(t * 0.35) * 0.15) - head.rotation.y) * 0.06;
-    head.rotation.x += ((mouse.y * 0.25 - 0.05) - head.rotation.x) * 0.06;
-    neck.rotation.z = Math.sin(t * 0.6) * 0.04;
-    // wave
-    wave.el.rotation.z = 1.95 + Math.sin(t * 3.2) * 0.22;
-    wave.wr.rotation.z = 0.1 + Math.sin(t * 3.2 - 0.6) * 0.18;
-    wave.fingers.forEach((f, i) => { f.rotation.x = 0.08 + Math.max(0, Math.sin(t * 0.8 + i)) * 0.12; });
-    rest.sh.rotation.x = 0.15 + Math.sin(t * 1.1) * 0.03;
-    eyeStrip.material.opacity = 0.6 + Math.sin(t * 4) * 0.3;
-    eyeStrip.position.y = 0.38 + Math.sin(t * 1.5) * 0.08;
+    if (!model) return;
+    for (const k in BUILD) bones[k] && bones[k].scale.set(...BUILD[k]);
+    // wave with the robot's left hand, look toward the cursor
+    const W = WAVE, w = Math.sin(t * 3.2);
+    nudge(bones.LeftArm, W.arm[0], W.arm[1], W.arm[2]);
+    nudge(bones.LeftForeArm, W.fore[0] + w * W.swing[0], W.fore[1] + w * W.swing[1], W.fore[2] + w * W.swing[2]);
+    nudge(bones.LeftHand, W.hand[0], W.hand[1], W.hand[2] + Math.sin(t * 3.2 - 0.6) * 0.2);
+    nudge(bones.Neck, mouse.y * 0.15, mouse.x * 0.35, 0);
+    nudge(bones.Head, mouse.y * 0.12, mouse.x * 0.25, 0);
+    model.rotation.y += ((BASE_YAW + mouse.x * 0.1) - model.rotation.y) * 0.03;
+    if (eyeStrip) { eyeStrip.material.opacity = 0.6 + Math.sin(t * 4) * 0.3; eyeStrip.position.y = Math.sin(t * 1.5) * 0.02; }
     dust.rotation.y = t * 0.02;
   }
+
+  let running = true, visible = true, raf;
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible && running && model && !reduce) loop(); }).observe(stage);
+  window.__robotStop = () => { running = false; cancelAnimationFrame(raf); };
+
   function loop() {
     cancelAnimationFrame(raf);
     if (!running || !visible) return;
     raf = requestAnimationFrame(loop);
-    pose(clock.getElapsedTime());
+    const dt = Math.min(clock.getDelta(), 0.05);
+    mixer && mixer.update(dt);
+    pose(clock.elapsedTime);
     renderer.render(scene, camera);
   }
-  if (reduce) { pose(0); renderer.render(scene, camera); } else loop();
 })();
 </script>
 </body>
