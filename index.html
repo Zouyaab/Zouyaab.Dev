@@ -667,136 +667,167 @@
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.toneMappingExposure = 0.95;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x070707, 9, 20);
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
 
-  // studio reflections for the chrome: a dark room with a few light strips, burgundy bounce
+  // studio reflections: hot softboxes in a black room give the liquid-chrome look
   const pmrem = new THREE.PMREMGenerator(renderer);
   const env = new THREE.Scene();
-  env.background = new THREE.Color(0x050505);
-  const strip = (w, h, color, pos, rot) => {
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide }));
+  env.background = new THREE.Color(0x020202);
+  const box = (w, h, c, pos, rot) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: c, side: THREE.DoubleSide }));
     m.position.set(...pos); m.rotation.set(...rot); env.add(m);
   };
-  strip(6, 0.6, 0xffffff, [0, 4, -2], [Math.PI / 2, 0, 0]);
-  strip(0.5, 5, 0xffffff, [-5, 0, 1], [0, Math.PI / 2, 0]);
-  strip(8, 3, 0x7d1128, [5, -1, 0], [0, -Math.PI / 2, 0]);
-  strip(5, 2, 0xc0384f, [0, -3, 3], [-Math.PI / 3, 0, 0]);
-  strip(2, 2, 0xffe9ee, [2, 2, 5], [0, Math.PI, 0]);
-  scene.environment = pmrem.fromScene(env, 0.02).texture;
+  const hot = new THREE.Color(2.6, 2.4, 2.5), warm = new THREE.Color(2.2, 1.4, 1.5);
+  box(10, 1.2, hot, [0, 6, 0], [Math.PI / 2, 0, 0]);
+  box(1.2, 8, warm, [-6, 0, 2], [0, Math.PI / 2, 0]);
+  box(0.8, 8, hot, [6, 1, -1], [0, -Math.PI / 2, 0]);
+  box(4, 4, new THREE.Color(0.5, 0.35, 0.4), [0, 0, 7], [0, Math.PI, 0]);
+  box(14, 2, new THREE.Color(0.5, 0.05, 0.12), [0, -5, 0], [-Math.PI / 2, 0, 0]);
+  box(1.5, 1.5, hot, [3, 3, 5], [0, Math.PI, 0]);
+  scene.environment = pmrem.fromScene(env, 0.015).texture;
 
-  const chrome = new THREE.MeshStandardMaterial({ color: 0xd8d8dc, metalness: 1, roughness: 0.18 });
-  const darkChrome = new THREE.MeshStandardMaterial({ color: 0x2a2a2e, metalness: 1, roughness: 0.35 });
-  const wine = new THREE.MeshStandardMaterial({ color: 0x7d1128, metalness: 0.6, roughness: 0.3 });
-  const glow = new THREE.MeshBasicMaterial({ color: 0xff3355 });
-  const visorMat = new THREE.MeshPhysicalMaterial({ color: 0x0a0204, metalness: 0.9, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03 });
+  // materials — burgundy liquid chrome
+  const shell = new THREE.MeshPhysicalMaterial({ color: 0x6e0f22, metalness: 1, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.08 });
+  const joint = new THREE.MeshPhysicalMaterial({ color: 0x3a0712, metalness: 1, roughness: 0.25, clearcoat: 0.6 });
+  const dark = new THREE.MeshStandardMaterial({ color: 0x1a0408, metalness: 1, roughness: 0.3 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0x0a0103, metalness: 0.95, roughness: 0.04, clearcoat: 1 });
+
+  const add = (parent, geo, mat, pos = [0, 0, 0], rot = [0, 0, 0], scale = [1, 1, 1]) => {
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set(...pos); m.rotation.set(...rot); m.scale.set(...scale);
+    parent.add(m); return m;
+  };
+  // capsule pointing down -y from the local origin
+  const limb = (parent, r1, r2, len, mat) => {
+    add(parent, new THREE.CylinderGeometry(r1, r2, len, 40, 1, true), mat, [0, -len / 2, 0]);
+    add(parent, new THREE.SphereGeometry(r1, 40, 24), mat);
+    add(parent, new THREE.SphereGeometry(r2, 40, 24), mat, [0, -len, 0]);
+  };
+  const lathe = (pts, segs = 72) => new THREE.LatheGeometry(pts.map(([x, y]) => new THREE.Vector2(x, y)), segs);
 
   const robot = new THREE.Group();
   scene.add(robot);
-  const head = new THREE.Group();
-  head.position.y = 0.55;
-  robot.add(head);
 
-  // skull: stretched sphere + top plate + side rings
-  const skull = new THREE.Mesh(new THREE.SphereGeometry(1, 64, 48), chrome);
-  skull.scale.set(1, 1.12, 1.05);
-  head.add(skull);
-  const crest = new THREE.Mesh(new THREE.TorusGeometry(1.02, 0.035, 12, 96, Math.PI), darkChrome);
-  crest.rotation.y = Math.PI / 2; crest.scale.y = 1.12;
-  head.add(crest);
-
-  // visor
-  const visor = new THREE.Mesh(new THREE.SphereGeometry(1.015, 64, 24, Math.PI * 0.16, Math.PI * 0.68, Math.PI * 0.37, Math.PI * 0.2), visorMat);
-  visor.scale.set(1, 1.12, 1.05);
-  head.add(visor);
-
-  // eyes
-  const eyes = [];
-  [-0.34, 0.34].forEach(x => {
-    const e = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.09, 0.05), glow);
-    e.position.set(x, 0.12, 0.99);
-    head.add(e); eyes.push(e);
-    const halo = new THREE.PointLight(0xff2244, 0.8, 2.5);
-    halo.position.set(x, 0.12, 1.2); head.add(halo);
-  });
-
-  // scan line across the visor
-  const scan = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.012), new THREE.MeshBasicMaterial({ color: 0xff4466, transparent: true, opacity: 0.7 }));
-  scan.position.z = 1.06;
-  head.add(scan);
-
-  // ears
-  [-1, 1].forEach(side => {
-    const ear = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.3, 0.16, 48), darkChrome);
-    ear.rotation.z = Math.PI / 2; ear.position.x = side * 1.0;
-    head.add(ear);
-    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.06, 48), wine);
-    cap.rotation.z = Math.PI / 2; cap.position.x = side * 1.1;
-    head.add(cap);
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.012, 8, 48), glow);
-    ring.rotation.y = Math.PI / 2; ring.position.x = side * 1.085;
-    head.add(ring);
-  });
-
-  // antenna
-  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.03, 0.5, 12), darkChrome);
-  mast.position.set(0.5, 1.2, -0.1); mast.rotation.z = -0.35;
-  head.add(mast);
-  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 12), glow);
-  tip.position.set(0.59, 1.43, -0.1);
-  head.add(tip);
-
-  // jaw / mouth grille
-  const jaw = new THREE.Mesh(new THREE.SphereGeometry(0.7, 48, 24, 0, Math.PI * 2, Math.PI * 0.55, Math.PI * 0.3), darkChrome);
-  jaw.position.set(0, -0.35, 0.25); jaw.scale.set(1, 0.9, 1.1);
-  head.add(jaw);
-  for (let i = 0; i < 5; i++) {
-    const slat = new THREE.Mesh(new THREE.BoxGeometry(0.42 - Math.abs(i - 2) * 0.06, 0.018, 0.04), wine);
-    slat.position.set(0, -0.55 - i * 0.055, 0.93 - i * 0.03);
-    head.add(slat);
-  }
-
-  // neck + shoulders
-  for (let i = 0; i < 4; i++) {
-    const seg = new THREE.Mesh(new THREE.CylinderGeometry(0.3 + i * 0.03, 0.3 + i * 0.03, 0.11, 40), i % 2 ? wine : darkChrome);
-    seg.position.y = -0.72 - i * 0.13;
-    robot.add(seg);
-  }
-  const torso = new THREE.Mesh(new THREE.SphereGeometry(1.6, 64, 32, 0, Math.PI * 2, 0, Math.PI * 0.42), chrome);
-  torso.position.y = -2.75; torso.scale.set(1.3, 1, 0.75);
+  // ---- torso ----
+  const torso = new THREE.Group();
   robot.add(torso);
-  const collar = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.06, 16, 64), darkChrome);
-  collar.rotation.x = Math.PI / 2; collar.position.y = -1.22;
-  robot.add(collar);
-  const core = new THREE.Mesh(new THREE.CircleGeometry(0.16, 6), glow);
-  core.position.set(0, -1.85, 1.05); core.rotation.x = -0.35;
-  robot.add(core);
+  add(torso, lathe([[0, 1.05], [0.42, 1.02], [0.78, 0.9], [0.95, 0.6], [0.92, 0.2], [0.78, -0.25], [0.6, -0.6], [0, -0.65]]), shell, [0, 0, 0], [0, 0, 0], [1, 1, 0.62]);
+  // pec plates
+  [-1, 1].forEach(s => add(torso, new THREE.SphereGeometry(0.42, 48, 32), shell, [s * 0.36, 0.48, 0.32], [0, 0, 0], [1.05, 0.62, 0.45]));
+  // abdomen rings
+  for (let i = 0; i < 5; i++) {
+    add(torso, new THREE.TorusGeometry(0.5 - i * 0.015, 0.075, 16, 64), i % 2 ? joint : shell, [0, -0.66 - i * 0.13, 0], [Math.PI / 2, 0, 0], [1, 0.66, 1]);
+  }
+  add(torso, new THREE.CylinderGeometry(0.42, 0.4, 0.7, 40), dark, [0, -0.95, 0], [0, 0, 0], [1, 1, 0.66]);
+  add(torso, lathe([[0, -1.3], [0.62, -1.32], [0.7, -1.6], [0.66, -2.1], [0, -2.1]]), shell, [0, 0, 0], [0, 0, 0], [1, 1, 0.66]);
 
-  // floating particles
-  const pts = new THREE.BufferGeometry();
-  const N = 400, arr = new Float32Array(N * 3);
-  for (let i = 0; i < N; i++) { arr[i * 3] = (Math.random() - .5) * 14; arr[i * 3 + 1] = (Math.random() - .5) * 9; arr[i * 3 + 2] = (Math.random() - .5) * 8 - 2; }
-  pts.setAttribute('position', new THREE.BufferAttribute(arr, 3));
-  const dust = new THREE.Points(pts, new THREE.PointsMaterial({ color: 0xc0384f, size: 0.025, transparent: true, opacity: 0.7 }));
+  // ---- neck: ribbed, like a hose ----
+  const neck = new THREE.Group();
+  neck.position.set(0, 0.92, -0.02);
+  torso.add(neck);
+  add(neck, new THREE.CylinderGeometry(0.13, 0.15, 0.62, 24), dark, [0, 0.3, 0]);
+  for (let i = 0; i < 6; i++) add(neck, new THREE.TorusGeometry(0.17, 0.045, 12, 40), i % 2 ? joint : shell, [0, 0.04 + i * 0.085, 0], [Math.PI / 2, 0, 0]);
+
+  // ---- head with VR-style visor ----
+  const head = new THREE.Group();
+  head.position.set(0, 0.5, 0.02);
+  head.scale.setScalar(1.45);
+  neck.add(head);
+  add(head, new THREE.SphereGeometry(0.46, 64, 48), shell, [0, 0.36, -0.06], [0, 0, 0], [0.92, 1, 1.05]);
+  add(head, new THREE.SphereGeometry(0.28, 48, 32), shell, [0, 0.0, 0.12], [0, 0, 0], [1, 0.9, 1.1]); // jaw
+  const visorShape = new THREE.Shape();
+  const vw = 0.9, vh = 0.42, vr = 0.15;
+  visorShape.moveTo(-vw / 2 + vr, -vh / 2);
+  visorShape.lineTo(vw / 2 - vr, -vh / 2); visorShape.quadraticCurveTo(vw / 2, -vh / 2, vw / 2, -vh / 2 + vr);
+  visorShape.lineTo(vw / 2, vh / 2 - vr); visorShape.quadraticCurveTo(vw / 2, vh / 2, vw / 2 - vr, vh / 2);
+  visorShape.lineTo(-vw / 2 + vr, vh / 2); visorShape.quadraticCurveTo(-vw / 2, vh / 2, -vw / 2, vh / 2 - vr);
+  visorShape.lineTo(-vw / 2, -vh / 2 + vr); visorShape.quadraticCurveTo(-vw / 2, -vh / 2, -vw / 2 + vr, -vh / 2);
+  const visorGeo = new THREE.ExtrudeGeometry(visorShape, { depth: 0.34, bevelEnabled: true, bevelThickness: 0.09, bevelSize: 0.08, bevelSegments: 10, curveSegments: 24 });
+  visorGeo.center();
+  add(head, visorGeo, shell, [0, 0.38, 0.36]);
+  add(head, new THREE.PlaneGeometry(vw * 0.86, vh * 0.7), glass, [0, 0.38, 0.62]);
+  const eyeStrip = add(head, new THREE.PlaneGeometry(vw * 0.7, 0.03), new THREE.MeshBasicMaterial({ color: 0xff3a5c, transparent: true, opacity: 0.9 }), [0, 0.38, 0.625]);
+  add(head, new THREE.TorusGeometry(0.47, 0.05, 16, 64), joint, [0, 0.4, -0.02], [Math.PI / 2, 0, 0], [0.95, 1.1, 1]); // strap
+  add(head, new THREE.TorusGeometry(0.46, 0.045, 16, 64, Math.PI), joint, [0, 0.36, -0.05], [0, Math.PI / 2, 0]); // top strap
+  [-1, 1].forEach(s => add(head, new THREE.CylinderGeometry(0.12, 0.12, 0.08, 32), dark, [s * 0.44, 0.38, 0], [0, 0, Math.PI / 2]));
+
+  // ---- arms ----
+  function arm(side) {
+    const sh = new THREE.Group();
+    sh.position.set(side * 1.0, 0.72, 0);
+    torso.add(sh);
+    add(sh, new THREE.SphereGeometry(0.44, 48, 32), shell, [side * 0.06, 0.06, 0], [0, 0, 0], [1, 0.95, 0.95]); // shoulder cap
+    limb(sh, 0.27, 0.22, 0.95, shell);
+    for (let i = 0; i < 3; i++) add(sh, new THREE.TorusGeometry(0.24, 0.035, 10, 32), joint, [0, -0.32 - i * 0.07, 0], [Math.PI / 2, 0, 0]);
+    const el = new THREE.Group();
+    el.position.y = -0.95;
+    sh.add(el);
+    add(el, new THREE.SphereGeometry(0.25, 40, 24), joint);
+    limb(el, 0.23, 0.16, 0.9, shell);
+    const wr = new THREE.Group();
+    wr.position.y = -0.95;
+    wr.scale.setScalar(1.35);
+    el.add(wr);
+    add(wr, new THREE.SphereGeometry(0.1, 24, 16), joint, [0, 0.04, 0]);
+    // palm (faces +z) and fingers along -y
+    add(wr, new THREE.BoxGeometry(0.34, 0.36, 0.12), shell, [0, -0.2, 0]);
+    add(wr, new THREE.SphereGeometry(0.19, 32, 20), shell, [0, -0.2, 0], [0, 0, 0], [0.95, 1.05, 0.38]);
+    const fingers = [];
+    [-0.12, -0.04, 0.04, 0.12].forEach((x, i) => {
+      const f = new THREE.Group();
+      f.position.set(x, -0.38, 0);
+      f.rotation.z = x * 0.6;
+      wr.add(f);
+      const l1 = [0.15, 0.19, 0.18, 0.13][i];
+      limb(f, 0.038, 0.034, l1, shell);
+      const k = new THREE.Group(); k.position.y = -l1; f.add(k);
+      limb(k, 0.033, 0.028, l1 * 0.8, shell);
+      fingers.push(f, k);
+    });
+    const th = new THREE.Group();
+    th.position.set(side * -0.17, -0.12, 0.02);
+    th.rotation.z = side * -0.9;
+    wr.add(th);
+    limb(th, 0.045, 0.034, 0.18, shell);
+    const thk = new THREE.Group(); thk.position.y = -0.18; th.add(thk);
+    limb(thk, 0.034, 0.028, 0.13, shell);
+    return { sh, el, wr, fingers };
+  }
+  // robot's left hand (viewer's right) waves; the other hangs relaxed
+  const wave = arm(1);
+  const rest = arm(-1);
+  wave.sh.rotation.set(0, 0, 1.15);
+  wave.el.rotation.set(0, 0, 1.95);
+  wave.wr.rotation.set(0, 0, 0.1);
+  rest.sh.rotation.set(0.15, 0, -0.18);
+  rest.el.rotation.set(-0.45, 0, 0.05);
+  rest.wr.rotation.set(0, 0, -0.1);
+  rest.fingers.forEach((f, i) => { f.rotation.x = i % 2 ? 0.7 : 0.5; });
+
+  // floating dust
+  const N = 380, arr = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) { arr[i * 3] = (Math.random() - .5) * 16; arr[i * 3 + 1] = (Math.random() - .5) * 10; arr[i * 3 + 2] = (Math.random() - .5) * 8 - 3; }
+  const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+  const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xc0384f, size: 0.025, transparent: true, opacity: 0.6 }));
   scene.add(dust);
 
-  // lights
-  scene.add(new THREE.AmbientLight(0xffffff, 0.15));
-  const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-3, 4, 5); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xc0384f, 3); rim.position.set(4, 1, -3); scene.add(rim);
-  const under = new THREE.PointLight(0x7d1128, 4, 8); under.position.set(0, -2.5, 2); scene.add(under);
+  // a little direct light for punchier highlights
+  const key = new THREE.DirectionalLight(0xffe6ea, 0.6); key.position.set(-3, 5, 6); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xc0384f, 1.6); rim.position.set(5, 2, -4); scene.add(rim);
 
-  // framing: robot sits right of the copy on desktop, centered behind it on mobile
+  robot.rotation.y = -0.18;
+
   function resize() {
     const w = stage.clientWidth, h = stage.clientHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     const mobile = w < 900;
-    camera.position.set(0, 0.3, mobile ? 11 : 10.5);
-    camera.setViewOffset(w, h, mobile ? 0 : -w * 0.27, mobile ? -h * 0.06 : 0, w, h);
+    camera.position.set(0, 1.1, mobile ? 12.5 : 10);
+    camera.lookAt(0, 1.1, 0);
+    camera.setViewOffset(w, h, mobile ? -w * 0.04 : -w * 0.16, mobile ? -h * 0.02 : h * 0.06, w, h);
     camera.updateProjectionMatrix();
   }
   addEventListener('resize', resize);
@@ -805,38 +836,37 @@
   const mouse = { x: 0, y: 0 };
   addEventListener('pointermove', e => { mouse.x = e.clientX / innerWidth * 2 - 1; mouse.y = e.clientY / innerHeight * 2 - 1; });
 
-  let running = true, raf, visible = true;
+  let running = true, visible = true, raf;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && running && !reduce) loop(); }).observe(stage);
   window.__robotStop = () => { running = false; cancelAnimationFrame(raf); };
 
   const clock = new THREE.Clock();
-  let blinkAt = 2;
+  function pose(t) {
+    // breathing + sway
+    torso.position.y = Math.sin(t * 1.1) * 0.03;
+    torso.rotation.z = Math.sin(t * 0.5) * 0.025;
+    robot.rotation.y += ((-0.18 + mouse.x * 0.12) - robot.rotation.y) * 0.03;
+    // head follows the cursor
+    head.rotation.y += ((mouse.x * 0.5 + Math.sin(t * 0.35) * 0.15) - head.rotation.y) * 0.06;
+    head.rotation.x += ((mouse.y * 0.25 - 0.05) - head.rotation.x) * 0.06;
+    neck.rotation.z = Math.sin(t * 0.6) * 0.04;
+    // wave
+    wave.el.rotation.z = 1.95 + Math.sin(t * 3.2) * 0.22;
+    wave.wr.rotation.z = 0.1 + Math.sin(t * 3.2 - 0.6) * 0.18;
+    wave.fingers.forEach((f, i) => { f.rotation.x = 0.08 + Math.max(0, Math.sin(t * 0.8 + i)) * 0.12; });
+    rest.sh.rotation.x = 0.15 + Math.sin(t * 1.1) * 0.03;
+    eyeStrip.material.opacity = 0.6 + Math.sin(t * 4) * 0.3;
+    eyeStrip.position.y = 0.38 + Math.sin(t * 1.5) * 0.08;
+    dust.rotation.y = t * 0.02;
+  }
   function loop() {
     cancelAnimationFrame(raf);
     if (!running || !visible) return;
     raf = requestAnimationFrame(loop);
-    const t = clock.getElapsedTime();
-    const idleX = Math.sin(t * 0.4) * 0.25, idleY = Math.sin(t * 0.3) * 0.08;
-    head.rotation.y += ((mouse.x * 0.55 + idleX) - head.rotation.y) * 0.05;
-    head.rotation.x += ((mouse.y * 0.25 + idleY) - head.rotation.x) * 0.05;
-    head.rotation.z = Math.sin(t * 0.5) * 0.03;
-    robot.position.y = Math.sin(t * 0.8) * 0.06;
-    robot.rotation.y = head.rotation.y * 0.25;
-
-    // blink
-    const b = t - blinkAt;
-    const sy = b > 0 && b < 0.16 ? Math.abs(b - 0.08) / 0.08 : 1;
-    eyes.forEach(e => e.scale.set(1, Math.max(sy, 0.08), 1));
-    if (b > 0.16) blinkAt = t + 2 + Math.random() * 4;
-
-    scan.position.y = 0.12 + Math.sin(t * 1.6) * 0.32;
-    scan.material.opacity = 0.35 + Math.sin(t * 9) * 0.25;
-    glow.color.setHSL(0.97, 1, 0.55 + Math.sin(t * 3) * 0.08);
-    dust.rotation.y = t * 0.02;
-    dust.position.y = Math.sin(t * 0.2) * 0.2;
+    pose(clock.getElapsedTime());
     renderer.render(scene, camera);
   }
-  if (reduce) renderer.render(scene, camera); else loop();
+  if (reduce) { pose(0); renderer.render(scene, camera); } else loop();
 })();
 </script>
 </body>
