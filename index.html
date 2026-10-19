@@ -59,7 +59,7 @@
   /* corner meta row — the poster signature */
   .meta-row { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
   .meta-row span { white-space: nowrap; }
-  @media (max-width: 640px) { .meta-row span:nth-child(2) { display: none; } }
+  @media (max-width: 640px) { .meta-row > span:nth-child(2):not(:last-child) { display: none; } }
 
   /* nav */
   header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(7,7,7,.72); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
@@ -302,7 +302,7 @@
       <div class="cam">Cam 01 · 4K · 24fps<br>Karachi, PK · 24.86°N 67.00°E</div>
     </div>
     <div class="wrap" style="width:100%">
-      <div class="meta-row mono"><span><span class="arrow">↗</span>Zouyaab.dev</span><span><span class="arrow">↗</span>AI Engineer / Data Scientist</span><span><span class="arrow">↗</span>2026</span></div>
+      <div class="meta-row mono"><span><span class="arrow">↗</span>AI Engineer / Data Scientist</span><span><span class="arrow">↗</span>2026</span></div>
     </div>
     <div class="wrap hero-body">
       <div>
@@ -312,7 +312,7 @@
         <div class="hero-cta">
           <a class="btn wine" href="#work">View selected work ↘</a>
           <a class="btn" href="https://github.com/Zouyaab" target="_blank" rel="noopener">GitHub ↗</a>
-          <a class="btn" href="https://www.linkedin.com/in/zouyaab-hussain" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn" href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
     </div>
@@ -580,7 +580,7 @@
           <p style="max-width:460px;margin-bottom:28px">Available for freelance work — AI automation, voice agents, document AI and machine learning — and open to data science and AI engineering roles.</p>
           <div class="contact-links">
             <a href="mailto:zouyaabh@gmail.com"><span>zouyaabh@gmail.com</span><span>↗</span></a>
-            <a href="https://www.linkedin.com/in/zouyaab-hussain" target="_blank" rel="noopener"><span>LinkedIn</span><span>↗</span></a>
+            <a href="https://www.linkedin.com/in/zouyaab-hussain-7b8693218" target="_blank" rel="noopener"><span>LinkedIn</span><span>↗</span></a>
             <a href="https://github.com/Zouyaab" target="_blank" rel="noopener"><span>GitHub</span><span>↗</span></a>
           </div>
         </div>
