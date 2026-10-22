@@ -153,7 +153,8 @@
   @keyframes tick { to { transform: translateX(-50%); } }
 
   @media (max-width: 900px) {
-    .stage { opacity: .55; }
+    .stage { opacity: .8; }
+    .hero-lede, .status { text-shadow: 0 1px 14px rgba(7,7,7,.9), 0 0 2px rgba(7,7,7,.8); }
     .stage::before { background: linear-gradient(0deg, var(--bg) 0%, rgba(7,7,7,.35) 40%, rgba(7,7,7,.2) 100%); }
     .hud .reticle, .hud .cam { display: none; }
   }
@@ -759,14 +760,25 @@
   const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xc0384f, size: 0.012, transparent: true, opacity: 0.6 }));
   scene.add(dust);
 
+  // Mobile framing (metres): centre slightly toward the waving arm, keep this much in view.
+  const FRAME_X = 0.18, FRAME_HALF_W = 0.62, FRAME_HALF_H = 1.05;
   function resize() {
     const w = stage.clientWidth, h = stage.clientHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    const mobile = w < 900;
-    camera.position.set(0, 1.5, mobile ? 3.4 : 2.75);
-    camera.lookAt(0, 1.45, 0);
-    camera.setViewOffset(w, h, mobile ? -w * 0.03 : -w * 0.2, mobile ? -h * 0.02 : h * 0.04, w, h);
+    if (w < 900) {
+      // Narrow screens: the vertical FOV is fixed, so a tall phone sees a thin
+      // slice. Back off until the whole robot, waving arm included, fits the width.
+      const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+      const dist = Math.max(3.4, FRAME_HALF_W / (tanV * camera.aspect), FRAME_HALF_H / tanV);
+      camera.position.set(FRAME_X, 1.0, dist);
+      camera.lookAt(FRAME_X, 1.0, 0);
+      camera.clearViewOffset();
+    } else {
+      camera.position.set(0, 1.5, 2.75);
+      camera.lookAt(0, 1.45, 0);
+      camera.setViewOffset(w, h, -w * 0.2, h * 0.04, w, h);
+    }
     camera.updateProjectionMatrix();
   }
   addEventListener('resize', resize);
