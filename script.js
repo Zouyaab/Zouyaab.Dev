@@ -1,5 +1,5 @@
 /* =========================================================
-   Zouyaab.Dev — interactions
+   Zouyaab.Dev interactions
    ========================================================= */
 
 /* ---------- current year ---------- */
@@ -152,7 +152,7 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  // Honeypot — bots fill this; humans leave it empty.
+  // Honeypot: bots fill this; humans leave it empty.
   if (data._honey) {
     note.textContent = 'Message sent. Thank you!';
     note.className = 'form-note ok';
@@ -191,7 +191,7 @@ form.addEventListener('submit', async (e) => {
       throw new Error(result.message || 'Could not send message');
     }
 
-    note.textContent = 'Message sent — I’ll get back to you soon.';
+    note.textContent = 'Message sent. I’ll get back to you soon.';
     note.className = 'form-note ok';
     form.reset();
   } catch (err) {

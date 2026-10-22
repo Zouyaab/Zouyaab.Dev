@@ -1,7 +1,7 @@
-# Zouyaab.Dev — Portfolio
+# Zouyaab.Dev Portfolio
 
 Single-page portfolio for Zouyaab Hussain, AI Engineer & Data Scientist.
-Plain HTML, CSS and JavaScript — no build step, no dependencies. Served by GitHub Pages.
+Plain HTML, CSS and JavaScript, no build step, no dependencies. Served by GitHub Pages.
 
 | File | Purpose |
 |---|---|
