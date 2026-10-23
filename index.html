@@ -762,6 +762,8 @@
 
   // Mobile framing (metres): centre slightly toward the waving arm, keep this much in view.
   const FRAME_X = 0.18, FRAME_HALF_W = 0.62, FRAME_HALF_H = 1.05;
+  // Desktop: how far right of centre the waving hand reaches (metres).
+  const HAND_REACH = 0.8;
   function resize() {
     const w = stage.clientWidth, h = stage.clientHeight;
     renderer.setSize(w, h, false);
@@ -775,9 +777,14 @@
       camera.lookAt(FRAME_X, 1.0, 0);
       camera.clearViewOffset();
     } else {
-      camera.position.set(0, 1.5, 2.75);
+      // Shift the robot right of the text, easing off on squarer laptop screens,
+      // and back off until the waving hand stays inside the right edge.
+      const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+      const shift = THREE.MathUtils.clamp(0.14 - (1.8 - camera.aspect) * 0.15, 0.06, 0.14);
+      const dist = Math.max(3.0, HAND_REACH / (tanV * camera.aspect * (0.94 - 2 * shift)));
+      camera.position.set(0, 1.5, dist);
       camera.lookAt(0, 1.45, 0);
-      camera.setViewOffset(w, h, -w * 0.2, h * 0.04, w, h);
+      camera.setViewOffset(w, h, -w * shift, h * 0.04, w, h);
     }
     camera.updateProjectionMatrix();
   }
